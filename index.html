@@ -286,14 +286,14 @@ body::before {
     <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
     <div class="modal-title" style="font-family:var(--font-display); font-size:20px; font-weight:600; text-align:center; margin-bottom:4px;">ยินดีต้อนรับสู่ Get Oracle</div>
     <div class="modal-sub" style="text-align:center; margin-bottom:20px; font-size:12px; color:var(--ink-muted);">กรุณาระบุข้อมูลเพื่อใช้เรียกดูและบันทึกแต้มของท่าน</div>
-    
+     
     <div style="margin-bottom:12px;">
       <input type="email" id="loginEmail" placeholder="ระบุอีเมลของท่าน (เช่น name@gmail.com)" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:var(--radius-sm); font-family:var(--font-body); font-size:13px; background:var(--cream);">
     </div>
     <div style="margin-bottom:20px;">
       <input type="tel" id="loginPhone" placeholder="ระบุเบอร์โทรศัพท์ (เช่น 08XXXXXXXX)" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:var(--radius-sm); font-family:var(--font-body); font-size:13px; background:var(--cream);">
     </div>
-    
+     
     <div style="display:flex; flex-direction:column; gap:10px;" id="loginActionBox">
       <button class="btn btn-dark" style="width:100%; padding:14px; border-radius:var(--radius-sm); font-weight:600; justify-content:center; font-size:13px;" id="loginBtnReal" onclick="doLogin()">🔓 เข้าสู่ระบบ (สำหรับท่านที่เป็นสมาชิกแล้ว)</button>
       <button class="btn btn-gold" style="width:100%; padding:14px; border-radius:var(--radius-sm); font-weight:600; justify-content:center; font-size:13px;" id="regBtnReal" onclick="doRegister()">✨ ลงทะเบียนใหม่ (รับฟรี 3 แต้มแรกเข้า)</button>
@@ -323,7 +323,7 @@ const state = {
 //  🔮 ฐานข้อมูลคำทำนายไพ่ออราเคิล ครบถ้วนสมบูรณ์ 48 ใบถ้วน
 // ==========================================
 const CARDS = [
-  { glyph: '🔮', name: 'The High Priestess', sub: 'Intuition', finance: 'การเงินวันนี้บอกให้ใช้สัญชาตญาณ อย่าเพิ่งลงทุนใหญ่ด้วยอารมณ์ชั่ววูบ มีเงินหมุนเวียนเข้ามาดีขึ้น', work: 'สติปัญญาเฉียบแหลม เหมาะกับงานวิจัย ออกแบบ หรือแก้ไขปัญยากๆ ระวังความลับเรื่องโปรเจกต์รั่วไหล', love: 'เน้นความเงียบและเข้าใจกันลึกซึ้ง คนโสดมีความรู้สึกดีๆ แอบแฝงกับใครบางคนที่คุ้นเคย', luck: 'ดวงภาพรวมดีเยี่ยมแต่ต้องอิงความรู้สึกแรกเป็นหลัก เลขนำโชคคือ 7 และ 2' },
+  { glyph: '🔮', name: 'The High Priestess', sub: 'Intuition', finance: 'การเงินวันนี้บอกให้ใช้สัญชาตญาณ อย่าเพิ่งลงทุนใหญ่ด้วยอารมณ์ชั่ววูบ มีเงินหมวนเวียนเข้ามาดีขึ้น', work: 'สติปัญญาเฉียบแหลม เหมาะกับงานวิจัย ออกแบบ หรือแก้ไขปัญยากๆ ระวังความลับเรื่องโปรเจกต์รั่วไหล', love: 'เน้นความเงียบและเข้าใจกันลึกซึ้ง คนโสดมีความรู้สึกดีๆ แอบแฝงกับใครบางคนที่คุ้นเคย', luck: 'ดวงภาพรวมดีเยี่ยมแต่ต้องอิงความรู้สึกแรกเป็นหลัก เลขนำโชคคือ 7 และ 2' },
   { glyph: '☀️', name: 'The Sun', sub: 'Radiance', finance: 'การเงินเจิดจ้าสดใสที่สุดในกระดาน มีเกณฑ์ได้เงินก้อนใหญ่หรือลาภลอยจากการลงทุนสำเร็จ', work: 'โปรเจกต์งานได้รับการอนุมัติ ปัญหาเคลียร์จบราบรื่น เป็นจุดเด่นในที่ทำงานอย่างมากวันนี้', love: 'ความสัมพันธ์สดใส อบอุ่น มีความสุขสูงมาก คนโสดมีเสน่ห์ดึงดูดผู้คนล้อมรอบตัว', luck: 'โชคดีวิ่งเข้าหาตัวแบบไม่ต้องพยายามมากนัก ทำอะไรก็สำเร็จ' },
   { glyph: '⭐', name: 'The Star', sub: 'Hope', finance: 'เริ่มเห็นทางออกที่สว่างขึ้นหลังจากตึงมือ แผนรายได้ระยะยาวกำลังให้ผลตอบแทนที่ดี', work: 'ช่วงเวลาแห่งการฟื้นตัว ไอเดียใหม่ๆ ได้รับการชื่นชม ได้แรงบันดาลใจเติมพลังบวกเต็มที่', love: 'เยียวยาแผลใจได้ดี ความสัมพันธ์กลับมาเข้าใจกันด้วยความหวังอันงดงาม คนโสดมีความหวังใหม่', luck: 'ความเครียดลดลง อุปสรรคสลายตัว มีผู้ใหญ่คอยส่งพลังงานบวกสนับสนุน' },
   { glyph: '🚀', name: 'The Rocket', sub: 'Acceleration', finance: 'การเงินพุ่งทะยาน มีเกณฑ์ได้เงินจากความรวดเร็วในการคว้าโอกาส หรือได้กำไรระยะสั้นจากการเก็งกำไร', work: 'งานเดินหน้าเร็วมาก โปรเจกต์สเกลใหญ่กำลังจะ Launch ได้รับแรงสนับสนุนให้เป็นผู้นำทีม', love: 'ความสัมพันธ์พัฒนาไปอย่างรวดเร็ว คนโสดมีเกณฑ์เจอคนถูกใจแบบปุบปับแล้วสปาร์กกันทันที', luck: 'ดวงดีแบบก้าวกระโดด ยิ่งแอคทีฟโชคยิ่งวิ่งเข้าหาตัว' },
@@ -335,7 +335,7 @@ const CARDS = [
   { glyph: '💎', name: 'The Premium', sub: 'Value', finance: 'หยิบจับอะไรก็เป็นเงินเป็นทอง มีเกณฑ์ได้ของหรูหรา ของมีค่า หรือได้รับเงินก้อนโตจากงานชิ้นเอก', work: 'ผลงานของคุณโดดเด่นจนได้รับคำชมระดับยอดเยี่ยม มีโอกาสได้อัปเกรดตำแหน่ง หรือได้รับโปรเจกต์สำคัญ', love: 'คู่ของคุณดูแลเอาใจใส่คุณอย่างดีราวกับเป็นคนสำคัญ คนโสดมีเกณฑ์เจอคนโปรไฟล์ดีเข้ามาขายขนมจีบ', luck: 'ดวงพรีเมียมดีเลิศ มีเกณฑ์ได้ลาภลอยชิ้นใหญ่ หรือได้รับโอกาสพิเศษที่น้อยคนจะได้' },
   { glyph: '🔋', name: 'The Battery', sub: 'Recharge', finance: 'การเงินเริ่มฟื้นตัว มีพลังในการหาเงินเพิ่มขึ้น รายจ่ายเริ่มนิ่งและควบคุมได้ดี', work: 'พลังงานเต็มร้อย เหมาะกับการเคลียร์งานกองโตที่ค้างคา หรือเริ่มต้นโปรเจกต์ใหม่ที่ต้องใช้พลังสูง', love: 'ความสัมพันธ์กลับมามีความสดชื่นและมีชีวิตชีวาอีกครั้ง คนโสดเสน่ห์แรงเพราะพลังงานบวกในตัวคุณ', luck: 'ดวงดีปานกลาง โชคลาภมาจากสุขภาพที่แข็งแรง การดูแลตัวเองส่งผลให้ดวงเปิด' },
   { glyph: '🧩', name: 'The Puzzle', sub: 'Problem Solving', finance: 'การเงินมีเรื่องให้ต้องคิดและคำนวณซับซ้อน แต่คุณจะหาทางจัดสรรงบประมาณจนผ่านไปได้ด้วยดี', work: 'เจองานที่ท้าทายความสามารถ มีปัญหาเข้ามาให้แก้ไข แต่ถ้าคุณมองภาพรวมออก คุณจะแก้โจทย์จนผ่านได้สวยงาม', love: 'เป็นช่วงที่ต้องปรับความเข้าใจในจุดที่ยังไม่คลิกกัน คนโสดยังคงมองหาคนที่ใช่ที่เคมีตรงกันจริงๆ', luck: 'ดวงปานกลางค่อนไปทางปวดหัว โชคลาภมาจากการปะติดปะต่อข้อมูลรอบตัว' },
-  { glyph: '🗝️', name: 'The Master Key', sub: 'Access & Solution', finance: 'พบช่องทางทำเงินใหม่ๆ ที่ไม่มีใครรู้ หรือได้ไขข้อข้องใจเรื่องหนี้สินและการลงทุนจนโปร่งสบาย', work: 'คุณคือกุญแจสำคัญของทีมในวันนี้ ปัญหาที่ใครก็แก้ไม่ได้ คุณจะได้รับไอเดียวิเศษที่สามารถปลดล็อกทุกอย่างได้', love: 'ความสัมพันธ์ปลดล็อก ปัญหาที่เคยคาใจจะคุยกันรู้เรื่อง คนโสดมีโอกาสเจอคนที่เปิดใจคุณได้สำเร็จ', luck: 'ดวงเปิดสุดๆ มีเกณฑ์ได้รับโอกาสทอง หรือมีสิ่งดีๆ เปิดทางให้โชคลาภหลั่งไหลเข้าหา' },
+  { glyph: '🗝️', name: 'The Master Key', sub: 'Access & Solution', finance: 'พบช่องทางทำเงินใหม่ๆ ที่ไม่มีใครรู้ หรือได้ไขข้อข้องใจเรื่องหนี้สินและการลงทุนจนโปร่งสบาย', work: 'คุณคือกกุญแจสำคัญของทีมในวันนี้ ปัญหาที่ใครก็แก้ไม่ได้ คุณจะได้รับไอเดียวิเศษที่สามารถปลดล็อกทุกอย่างได้', love: 'ความสัมพันธ์ปลดล็อก ปัญหาที่เคยคาใจจะคุยกันรู้เรื่อง คนโสดมีโอกาสเจอคนที่เปิดใจคุณได้สำเร็จ', luck: 'ดวงเปิดสุดๆ มีเกณฑ์ได้รับโอกาสทอง หรือมีสิ่งดีๆ เปิดทางให้โชคลาภหลั่งไหลเข้าหา' },
   { glyph: '🍃', name: 'The Cloud', sub: 'Freedom', finance: 'การเงินเบาสบาย ไม่เครียด มีกินมีใช้ตามอัตภาพ แต่อาจจะไม่มีเงินก้อนใหญ่เข้ามาหวือหวาในวันนี้', work: 'งานไหลลื่น ไม่มีอุปสรรคชิ้นใหญ่ ขจัดความเครียดไปได้เยอะ เหมาะกับการคิดงานนอกสถานที่', love: 'ความสัมพันธ์อิสระ ไม่ผูกมัดหรือกดดันกันจนเกินไป คนโสดยังรักความสโลว์ไลฟ์และอิสรภาพของตัวเอง', luck: 'ดวงกลางๆ ทรงตัว มีโชคลาภแบบเบาๆ เช่น ได้ของฝาก ได้กินอาหารอร่อยฟรี' },
   { glyph: '🛸', name: 'The Unknown', sub: 'Mystery', finance: 'ระวังรายจ่ายแปลกๆ ที่ไม่คาดคิด หรือการลงทุนในสิ่งที่คุณยังไม่มีความรู้ดีพอ ให้ชะลอการจ่ายเงินออกไปก่อน', work: 'ได้รับโจทย์งานที่แปลกใหม่ ไม่คุ้นเคย ต้องใช้การเรียนรู้และเปิดรับสิ่งใหม่นอกกรอบเดิมๆ', love: 'คนมีคู่อาจมีเรื่องเซอร์ไพรส์จากคนรัก คนโสดมีเกณฑ์เจอคนสไตล์ลึกลับ น่าค้นหา แต่อย่าเพิ่งรีบเทใจให้', luck: 'ดวงปานกลางแนวลึกลับ ลางสังหรณ์แม่นยำ ฝันแปลกๆ อาจจะนำโชคลาภมาให้' },
   { glyph: '📉', name: 'The System Crash', sub: 'Overload', finance: 'ดวงตกแรง! การเงินสะดุดกะทันหัน มีเกณฑ์เสียเงินกับค่าซ่อมแซม ของพัง หรือรายจ่ายที่ไม่ได้วางแผนไว้ งดเสี่ยงโชคเด็ดขาด', work: 'งานเจอปัญหาใหญ่ อุปสรรคโผล่ หรือระบบสะดุดกลางคัน ระวังการสื่อสารคลาดเคลื่อนกับเพื่อนร่วมงานจนเกิดการขัดแย้ง', love: 'ความสัมพันธ์ตึงเครียด อารมณ์บูดใส่กันง่ายมาก คนโสดยังไม่เหมาะกับการเปิดใจช่วงนี้ พักรักษาแผลใจก่อน', luck: 'ดวงแย่ ระวังตัวและเน้นความนิ่งรอบคอบ อย่าเพิ่งริเริ่มสิ่งใหม่เด็ดขาด' },
@@ -426,7 +426,6 @@ async function doRegister() {
   }
 }
 
-// 🔓 แก้ไขบั๊กสลับค่าล็อกอินแล้วแต้มเบิ้ล: ตรวจสถานะเช็กอินรายวันอย่างถูกต้อง
 async function doLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const phone = document.getElementById('loginPhone').value.trim();
@@ -445,14 +444,12 @@ async function doLogin() {
       state.tokens = res.tokens;
       state.user = { name: email.split('@')[0], email, phone };
       
-      // 🔥 จุดแก้ไขสำคัญ: บันทึกสถานะเช็กอินตามที่ระบบหลังบ้านตอบกลับมาตรง ๆ ไม่สลับค่า
       state.checkedInToday = res.checkedIn; 
       
       closeModal('loginModal');
       updateUI();
       fetchQaUpdates();
       
-      // แสดงป๊อปอัพแจ้งลูกค้าให้สอดคล้องกับสิทธิ์จริง
       if (res.checkedIn === true) {
         showToast('🔓 ยินดีต้อนรับกลับค่ะ (วันนี้ท่านรับแต้มประจำวันแล้ว)', 'success');
       } else {
@@ -599,7 +596,7 @@ function buyPackage(tokens, price) {
     <div class="modal-sub" style="text-align:center; margin-bottom:18px; font-size:13px;">
       ท่านเลือกแพ็กเกจ: <strong style="color:var(--ink);">🪙 ${tokens} แต้ม</strong> ยอดโอนสุทธิ: <strong style="color:var(--gold-dim);">฿${price}</strong>
     </div>
-    
+     
     <div style="background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; margin-bottom:16px; color:var(--ink);">
       <p style="font-size:12px; margin-bottom:4px; opacity:0.8;">โอนเงินผ่าน Mobile Banking มาที่</p>
       <p style="font-size:14px; font-weight:600; color:var(--ink-soft); margin-bottom:2px;">🏦 ธนาคารกสิกรไทย (KBank)</p>
@@ -645,7 +642,8 @@ function setMode(mode) {
 function initWeeklyCards() {
   const spread = document.getElementById('weeklySpread');
   if (spread.children.length > 0) return;
-  const labels = ['ต้นสัปดาห์', 'กลางสัปดาห์', 'ปลายสัปดาห์'];
+   
+  const labels = ['ไพ่ใบที่ 1', 'ไพ่ใบที่ 2', 'ไพ่ใบที่ 3'];
   spread.innerHTML = labels.map((l, i) => `
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
       <span style="font-size:11px;color:var(--ink-muted);font-family:var(--font-mono)">${l}</span>
@@ -668,13 +666,13 @@ function initWeeklyCards() {
 async function handleWeeklyRead() {
   if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนค่ะ', 'error'); openModal('loginModal'); return; }
   if (state.tokens < 3) { showToast('ยอดแต้มคงเหลือไม่เพียงพอทำนายรายสัปดาห์ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
-  
+   
   const btn = document.getElementById('weeklyBtn');
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner"></div> กำลังจัดแผ่กระแสคำทำนาย...';
-  
+   
   await updateServerToken(-3, "เปิดไพ่ทำนายดวงรายสัปดาห์ (3 ใบ)");
-  
+   
   const combo = WEEKLY_COMBOS[Math.floor(Math.random() * WEEKLY_COMBOS.length)];
   combo.cards.forEach((card, i) => {
     setTimeout(() => {
@@ -705,11 +703,10 @@ function showDailyResult(card) {
     </div>`;
   document.getElementById('dailyResult').style.display = 'block';
 }
-// 🌙 ปรับปรุงระบบทำนายรายสัปดาห์: เน้นภาพรวม 3 ด้านหลัก (งาน, เงิน, รัก) แบบเจาะลึก
+
 function showWeeklyResult(combo) {
   const cards = combo.cards;
-  
-  // สร้างเนื้อหาคำทำนายแบบยาวและลึกซึ้ง โดยดึงความหมายจากไพ่ทั้ง 3 ใบมาผสมผสานกัน
+   
   document.getElementById('weeklyResult').innerHTML = `
     <div class="result-box" style="animation: slide-up 0.8s ease;">
       <div style="text-align:center; margin-bottom:25px; border-bottom: 1px solid var(--border); padding-bottom:15px;">
@@ -763,8 +760,6 @@ function showWeeklyResult(combo) {
       </div>
     </div>`;
   document.getElementById('weeklyResult').style.display = 'block';
-}
-
 }
 
 function openModal(id) { 
