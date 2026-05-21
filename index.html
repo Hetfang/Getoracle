@@ -473,7 +473,7 @@ const CARDS = [
     luck: 'ดวงเฮงพุ่งชนโชคลาภใหญ่ ซื้อตัวเลขที่ชอบเน้นๆ ตัวเดียวไม่ต้องกระจายความเสี่ยง มีลุ้นรางวัลใหญ่รับทรัพย์เข้ากระเป๋าค่ะ',
     advice: 'ห้ามทำตัวโลเลจับปลาสองมือเด็ดขาดค่ะในวันนี้ ปักหมุดเป้าหมายหลักของชีวิตให้ชัดเจนเพียงเรื่องเดียวเน้นๆ แล้วทุ่มเทพลังสมาธิ พุ่งชนลุยทำมันให้สุดตัว ความแน่วแน่เด็ดขาดของคุณในวันนี้จะเนรมิตความสำเร็จอันยิ่งใหญ่ให้แน่นอนค่ะ' },
 
-  { glyph: 'Compass', name: 'The Navigator', sub: 'Guidance',
+  { glyph: '🧭', name: 'The Navigator', sub: 'Guidance',
     finance: 'ทิศทางการเงินขยับขยายไปในทางที่ดีขึ้นอย่างชัดเจน มีเกณฑ์จะได้พบเจอที่ปรึกษา ผู้เชี่ยวชาญ หรือผู้ใหญ่ใจดีเข้ามาช่วยชี้ช่องทางทำเงิน หรือแนะนำระบบการลงทุนที่ปลอดภัย มั่นคง และสร้างผลตอบแทนงอกเงยยั่งยืนให้แก่คุณในระยะยาวสบายใจค่ะ',
     work: 'หากคุณกำลังตกอยู่ในสภาวะหลงทาง เลือกไม่ได้ หรือติดโจทย์ปัญหาจนมืดแปดด้าน บอกเลยว่าวันนี้ชะตาเปิดสว่างไสว จะมีผู้ใหญ่ แนะนำ ที่ปรึกษา หรือกัลยาณมิตรสายงานเข้ามาช่วยชี้นำทาง ปลดล็อกชี้แนะทางออกจนงานผ่านฉลุยราบรื่นหายเหนื่อยค่ะ',
     love: 'คนมีคู่ช่วยกันเป็นเข็มทิศนำทางชีวิตคู่ ร่วมกันวางแผนอนาคต การสร้างฐานะ หรือการขยับขยายครอบครัวอย่างเป็นระบบสามัคคีดีเยี่ยม ส่วนคนโสดยินดีด้วยค่ะ มีเกณฑ์พบเจอคนที่เป็นผู้ใหญ่กว่า ความคิดความอ่านดี เข้ามาเป็นที่พึ่งพิงนำทางหัวใจให้สงบสุขค่ะ',
@@ -626,29 +626,35 @@ const CARDS = [
     love: 'ความสัมพันธ์ลงล็อกล็อกความสุขอย่างเป็นรูปธรรมชัดเจน คนมีคู่มีเกณฑ์ตกลงตกลงใจแต่งงานหรือใช้ชีวิตคู่สร้างครอบครัวร่วมกันอย่างเป็นทางการแฮปปี้ ส่วนคนโสดยินดีด้วยค่ะ คุณได้พบเจอคนสุดท้ายที่เป็นคำตอบที่ใช่ของชีวิตสละโสดสมใจอยากค่ะ',
     luck: 'ดวงเฮงดีเลิศปิดท้ายกระดานไพ่! ได้รับของรางวัลใหญ่ ได้ผลตอบแทนและลาภลอยก้อนโตจากความอุตสาหะทุ่มเทของตัวเองเต็มคลังทรัพย์ค่ะ',
     advice: 'คุณได้ก้าวผ่านอุปสรรคขวากหนามทั้งหมดและวิ่งเข้าสู่เส้นชัยสำเร็จอย่างสง่างามแล้วค่ะในวันนี้ ถอนหายใจยาวๆ ชื่นชมกับความสำเร็จและให้รางวัลตัวเองให้เต็มที่ จบดีลงานใหญ่อย่างงดงามแล้วพักผ่อนกายใจให้ชื่นฉ่ำเพื่อเตรียมพร้อมรับทรัพย์ต่อยาวๆ ค่ะ' }
-
-
-  
-
-
 ];
-
 
 const WEEKLY_COMBOS = [
   { cards: [CARDS[0], CARDS[1], CARDS[2]] }
 ];
 
 // ==========================================
-//  🔓 AUTOMATIC RE-LOGIN LOGIN SYSTEM
+//  🔓 CORE CONNECTIVITY (e.parameter URL สนับสนุน)
 // ==========================================
 window.addEventListener('DOMContentLoaded', () => {
   checkSavedLogin();
 });
 
+async function callAPI(payload) {
+  try {
+    const params = new URLSearchParams();
+    for (const key in payload) { params.append(key, payload[key]); }
+    const response = await fetch(`${BACKEND_API_URL}?${params.toString()}`, { method: "POST" });
+    return await response.json();
+  } catch (error) {
+    console.error("API Error:", error);
+    showToast("❌ การเชื่อมต่อติดขัด กรุณาลองใหม่อีกครั้งค่ะ", "error");
+    return null;
+  }
+}
+
 function checkSavedLogin() {
   const savedEmail = localStorage.getItem('oracle_email');
   const savedPhone = localStorage.getItem('oracle_phone');
-  
   if (savedEmail && savedPhone) {
     autoLogin(savedEmail, savedPhone);
   } else {
@@ -657,6 +663,7 @@ function checkSavedLogin() {
 }
 
 function showGuestTopbar() {
+  document.getElementById('authLoading').style.display = 'none';
   document.getElementById('topbarRight').innerHTML = `
     <button class="btn btn-outline" onclick="openModal('loginModal')">เข้าสู่ระบบ</button>
     <button class="btn btn-gold" onclick="openModal('loginModal')">สมัครฟรี ✨</button>
@@ -668,9 +675,8 @@ async function autoLogin(email, phone) {
   if (res && res.success) {
     state.loggedIn = true; state.tokens = res.tokens;
     state.user = { name: email.split('@')[0], email, phone };
-    state.checkedInToday = res.checkedIn; // ตรวจสอบค่าสถานะเช็กอินจริงจากดาต้าเบสสคริปต์กูเกิล
+    state.checkedInToday = res.checkedIn;
     updateUI(); fetchQaUpdates();
-    showToast('🔓 ดึงข้อมูลดวงชะตาอัตโนมัติเรียบร้อยค่ะ', 'success');
   } else {
     localStorage.removeItem('oracle_email');
     localStorage.removeItem('oracle_phone');
@@ -691,15 +697,11 @@ async function doRegister() {
   if (res && res.success) {
     localStorage.setItem('oracle_email', email);
     localStorage.setItem('oracle_phone', phone);
-
     state.loggedIn = true; state.tokens = res.tokens;
     state.user = { name: email.split('@')[0], email, phone };
-    
-    // 🔥 [แก้ไขบั๊กจุดตายสำเร็จ] ลูกค้าใหม่แกะกล่องต้องตั้งค่าเป็น false เสมอเพื่อให้มีสิทธิ์กดรับแต้มเอง!
     state.checkedInToday = false; 
-    
     closeModal('loginModal'); updateUI();
-    showToast('🎉 สมัครสมาชิกสำเร็จ รับแต้มของขวัญแรกเข้า 3 แต้มฟรีค่ะ! กดรับแต้มประจำวันเพิ่มได้เลยค่ะ', 'success');
+    showToast('🎉 สมัครสำเร็จ รับของขวัญแรกเข้าฟรี 3 แต้มค่ะ!', 'success');
   } else {
     showToast('⚠️ ' + (res ? res.message : 'เชื่อมต่อล้มเหลว'), 'error');
     b1.disabled = false; b2.disabled = false; b2.innerHTML = '✨ สมัครใหม่';
@@ -719,10 +721,9 @@ async function doLogin() {
   if (res && res.success) {
     localStorage.setItem('oracle_email', email);
     localStorage.setItem('oracle_phone', phone);
-
     state.loggedIn = true; state.tokens = res.tokens;
     state.user = { name: email.split('@')[0], email, phone };
-    state.checkedInToday = res.checkedIn; // ดึงประวัติที่แท้จริงไม่สลับมั่วซั่ว
+    state.checkedInToday = res.checkedIn;
     closeModal('loginModal'); updateUI(); fetchQaUpdates();
     showToast('🔓 เข้าสู่ระบบเรียบร้อย ยินดีต้อนรับกลับค่ะ', 'success');
   } else {
@@ -739,7 +740,7 @@ function doLogout() {
 
 async function updateServerToken(amount, reason) {
   if (!state.loggedIn) return false;
-  const res = await callAPI({ action: "updateToken", email: state.user.email, amount, reason });
+  const res = await callAPI({ action: "updateToken", email: state.user.email, amount: amount, reason: reason });
   if (res && res.success) {
     state.tokens = res.tokens;
     updateTokenBadge();
@@ -809,7 +810,6 @@ async function revealDailyCard(innerEl) {
 
   const cardWrapper = innerEl.parentElement;
   cardWrapper.classList.add('selected-by-user');
-  
   const allCards = document.querySelectorAll('#dailySelectDeck .tarot-card');
   allCards.forEach(c => c.style.pointerEvents = 'none');
 
@@ -965,7 +965,7 @@ function showWeeklyResult(combo) {
         <div class="result-reading-item">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>💼</span><strong>เส้นทางอาชีพและความสำเร็จ</strong></div>
           <div style="font-size:13.5px; line-height:1.7;">
-            ในส่วนของการงานนั้น ชะตาชีวิตในอาชีพของท่านกำลังพบกับการเปลี่ยนแปลง ไพ่บ่งบอกว่า ${cards[0].work} ซึ่งส่งแรงกระเพื่อมต่อเนื่องทำให้ ${cards[1].work} และสุดท้ายเป้าหมายปลายสัปดาห์จะลงเอยที่ ${cards[2].work} ถือเป็นช่วงเวลาที่ต้องใช้ความพยายามสูงแต่ผลลัพธ์คุ้มค่าเหนื่อยแน่นอนค่ะ
+            ในส่วนของการงานนั้น ชะตาชีวิต in อาชีพของท่านกำลังพบกับการเปลี่ยนแปลง ไพ่บ่งบอกว่า ${cards[0].work} ซึ่งส่งแรงกระเพื่อมต่อเนื่องทำให้ ${cards[1].work} และสุดท้ายเป้าหมายปลายสัปดาห์จะลงเอยที่ ${cards[2].work} ถือเป็นช่วงเวลาที่ต้องใช้ความพยายามสูงแต่ผลลัพธ์คุ้มค่าเหนื่อยแน่นอนค่ะ
           </div>
         </div>
 
@@ -983,7 +983,6 @@ function showWeeklyResult(combo) {
     </div>`;
   document.getElementById('weeklyResult').style.display = 'block';
 }
-
 // ==========================================
 //  💬 Q&A MANAGEMENT SYSTEMS
 // ==========================================
@@ -999,7 +998,7 @@ async function handleQaAsk() {
   const res = await callAPI({ action: "submitQA", email: state.user.email, question: q });
   if (res && res.success) {
     state.tokens = res.tokens; document.getElementById('qaInput').value = '';
-    showToast('✨ ส่งสาส์นคำถามสำเร็จ รอแม่หมอเห็ดฟางมาเขียนตอบดวงชะตาให้ด้านล่างค่ะ', 'success');
+    showToast('✨ ส่งสาส์นคำถามสำเร็จ รอแม่หมอเห็ดฟางมาตอบดวงให้ค่ะ', 'success');
     fetchQaUpdates();
   }
   btn.disabled = false; btn.innerHTML = '✨ ส่งคำถามฝากแม่หมอ';
@@ -1070,7 +1069,7 @@ function updateUI() {
       <span class="user-name">👤 ${state.user.name}</span>
       <div class="token-badge" id="tokenBadge">🪙 ${state.tokens} แต้ม</div>
       <button class="btn btn-ghost" onclick="openModal('topupModal')">+ เติมแต้ม</button>
-      <button class="btn btn-outline" onclick="doLogout()" style="padding:6px 12px; font-size:11px; border-color:transparent;">ออกจากระบบ</button>
+      <button class="btn btn-outline" onclick="doLogout()" style="padding:4px 10px; font-size:11px; margin-left:5px;">ออก</button>
     `;
     document.getElementById('checkinBanner').style.display = 'block';
     document.getElementById('modeTabs').style.display = 'flex';
@@ -1083,10 +1082,6 @@ function updateUI() {
   } else {
     showGuestTopbar();
   }
-}
-
-function updateUIAndCheckinState() {
-  updateUI();
 }
 
 function updateTokenBadge() {
@@ -1102,843 +1097,3 @@ function checkTokenWarning() {
 </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Oracle ✦ ดูดวงไพ่ออราเคิลแม่หมอเห็ดฟาง</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Thai:wght@300;400;500;600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
-<style>
-:root {
-  --cream: #F7F3EE;
-  --warm-white: #FDFAF7;
-  --gold: #C9A96E;
-  --gold-light: #E8D5B0;
-  --gold-dim: #8B6F3E;
-  --ink: #1A1612;
-  --ink-soft: #3D3530;
-  --ink-muted: #7A6E65;
-  --sage: #8BA888;
-  --rose: #C4847A;
-  --indigo: #6B7FC4;
-  --card-bg: #FFFFFF;
-  --border: rgba(201,169,110,0.25);
-  --shadow: 0 8px 40px rgba(26,22,18,0.10);
-  --shadow-card: 0 20px 60px rgba(26,22,18,0.15);
-  --radius: 18px;
-  --radius-sm: 10px;
-  --font-body: 'Noto Sans Thai', sans-serif;
-  --font-display: 'Playfair Display', serif;
-  --font-mono: 'Space Mono', monospace;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--cream); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
-
-body::before {
-  content: ''; position: fixed; inset: 0;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(201,169,110,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(107,127,196,0.06) 0%, transparent 60%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 0;
-}
-
-/* ===== TOP BAR ===== */
-.topbar { position: sticky; top: 0; z-index: 100; background: rgba(247,243,238,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.topbar-logo { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
-.topbar-logo span { color: var(--gold); }
-.topbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-
-.token-badge { display: flex; align-items: center; gap: 6px; background: var(--ink); color: var(--gold-light); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 500; font-family: var(--font-mono); letter-spacing: 0.02em; }
-.user-name { font-size: 13px; color: var(--ink-muted); font-weight: 500; }
-
-/* BUTTONS */
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s ease; white-space: nowrap; }
-.btn:active { transform: scale(0.97); }
-.btn-gold { background: var(--gold); color: var(--ink); }
-.btn-gold:hover { background: var(--gold-dim); color: #fff; }
-.btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold-dim); }
-.btn-dark { background: var(--ink); color: var(--cream); }
-.btn-dark:hover { background: var(--ink-soft); }
-.btn-ghost { background: rgba(201,169,110,0.12); color: var(--gold-dim); border: 1px solid rgba(201,169,110,0.3); }
-.btn-ghost:hover { background: rgba(201,169,110,0.22); }
-
-/* ===== HERO ===== */
-.hero { position: relative; z-index: 1; text-align: center; padding: 40px 24px 20px; }
-.hero-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
-.hero-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 54px); font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
-.hero-title em { font-style: italic; color: var(--gold-dim); }
-.hero-sub { font-size: 14px; color: var(--ink-muted); max-width: 480px; margin: 0 auto 20px; line-height: 1.6; }
-
-/* ===== CHECKIN BANNER ===== */
-.checkin-banner { max-width: 680px; margin: 0 auto 24px; padding: 0 16px; }
-.checkin-card { background: linear-gradient(135deg, var(--ink) 0%, #2A2420 100%); border-radius: var(--radius); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid rgba(201,169,110,0.2); box-shadow: var(--shadow-card); }
-.checkin-info { color: var(--cream); }
-.checkin-info strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; color: var(--gold-light); }
-.checkin-info span { font-size: 11px; color: rgba(247,243,238,0.5); }
-
-/* ===== SECTION TABS ===== */
-.section-tabs { max-width: 680px; margin: 0 auto 24px; padding: 0 16px; display: flex; gap: 8px; }
-.tab-btn { flex: 1; min-width: 0; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 8px; cursor: pointer; text-align: center; transition: all 0.2s; font-family: var(--font-body); }
-.tab-btn.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
-.tab-btn .tab-icon { font-size: 20px; display: block; margin-bottom: 2px; }
-.tab-btn .tab-label { font-size: 11px; font-weight: 600; display: block; white-space: nowrap; }
-.tab-btn .tab-cost { font-size: 9px; opacity: 0.6; display: block; font-family: var(--font-mono); }
-
-/* ===== ZONE WRAPPERS ===== */
-.mode-container { display: none; width: 100%; }
-.mode-container.active-mode { display: block; }
-.reading-zone { max-width: 680px; margin: 0 auto; padding: 0 16px 60px; position: relative; }
-
-/* QUESTION SELECTOR */
-.question-selector { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow); }
-.qs-title { font-size: 12px; font-weight: 600; color: var(--ink-muted); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
-.qs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.qs-btn { background: var(--cream); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 4px; cursor: pointer; text-align: center; transition: all 0.2s; font-family: var(--font-body); }
-.qs-btn.selected { border-color: var(--gold); background: rgba(201,169,110,0.12); color: var(--gold-dim); }
-.qs-btn .qs-icon { font-size: 20px; display: block; margin-bottom: 4px; }
-.qs-btn .qs-label { font-size: 12px; font-weight: 600; display: block; }
-
-/* ===== INTERACTIVE SELECTION PLACE ===== */
-.deck-wrapper { text-align: center; background: rgba(26,22,18,0.03); padding: 24px 12px; border-radius: var(--radius); border: 1px dashed var(--border); margin-bottom: 24px; }
-.deck-title { font-size: 14px; font-weight: 600; color: var(--gold-dim); margin-bottom: 16px; }
-.interactive-deck { display: flex; justify-content: center; gap: -20px; flex-wrap: wrap; max-width: 500px; margin: 0 auto; padding: 10px 0; }
-
-/* CARD ARCHITECTURE & ANIMATION EFFECTS */
-.tarot-card { width: 95px; height: 155px; position: relative; cursor: pointer; perspective: 1000px; transition: all 0.3s ease; margin: 0 -15px 15px -15px; }
-.tarot-card:hover { transform: translateY(-15px) rotate(-3deg); z-index: 50 !important; }
-.tarot-card.selected-by-user { transform: translateY(-25px) scale(1.05); filter: drop-shadow(0 10px 20px rgba(201,169,110,0.4)); z-index: 40 !important; pointer-events: none; }
-.tarot-card.reveal-animation .card-inner { transform: rotateY(180deg); }
-
-.card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-.card-face, .card-back { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.card-back { background: linear-gradient(145deg, #1A1612 0%, #2C2419 50%, #1A1612 100%); display: flex; align-items: center; justify-content: center; border: 1px solid var(--gold); }
-.card-back-pattern { width: 88%; height: 88%; border: 1px solid rgba(201,169,110,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-.card-back-pattern::before { content: '✦'; font-size: 24px; color: rgba(201,169,110,0.3); }
-
-.card-face { transform: rotateY(180deg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; text-align: center; background: var(--card-bg); border: 2px solid var(--gold-light); }
-.card-face-glyph { font-size: 28px; margin-bottom: 4px; }
-.card-face-name { font-family: var(--font-display); font-size: 11px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-.card-face-sub { font-size: 8px; color: var(--gold-dim); font-family: var(--font-mono); text-transform: uppercase; }
-
-/* ===== RESULT MODULE ===== */
-.result-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; box-shadow: var(--shadow); margin-top: 24px; width: 100%; }
-.result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-.result-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 22px; }
-.result-card-name { flex: 1; }
-.result-card-name strong { font-family: var(--font-display); font-size: 18px; display: block; }
-.result-card-name span { font-size: 10px; color: var(--gold); font-family: var(--font-mono); text-transform: uppercase; }
-.result-category-badge { font-size: 10px; padding: 4px 10px; border-radius: 999px; font-weight: 500; }
-.badge-finance { background: rgba(139,168,136,0.15); color: var(--sage); }
-.badge-work { background: rgba(107,127,196,0.15); color: var(--indigo); }
-.badge-love { background: rgba(196,132,122,0.15); color: var(--rose); }
-.badge-luck { background: rgba(201,169,110,0.15); color: var(--gold-dim); }
-.result-reading-item { background: var(--cream); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
-
-/* ADVICE LOCK SYSTEM (+1 TOKEN) */
-.advice-lock-zone { margin-top: 16px; background: rgba(201,169,110,0.06); border: 1px dashed var(--gold); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
-.advice-btn { background: var(--ink); color: var(--gold-light); border: none; padding: 10px 20px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
-.advice-btn:hover { background: var(--ink-soft); }
-
-/* ===== Q&A MODE ===== */
-.qa-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); width: 100%; }
-.qa-title { font-family: var(--font-display); font-size: 17px; margin-bottom: 4px; }
-.qa-subtitle { font-size: 11px; color: var(--ink-muted); margin-bottom: 14px; font-family: var(--font-mono); }
-.qa-input { width: 100%; padding: 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; background: var(--cream); resize: vertical; min-height: 80px; margin-bottom: 12px; }
-.qa-history { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
-.qa-item { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
-.qa-q { background: var(--ink); color: var(--cream); padding: 10px; font-size: 12.5px; }
-.qa-a { background: var(--cream); padding: 10px; font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); }
-
-/* ===== MODAL & TOAST ===== */
-.modal-overlay { position: fixed; inset: 0; background: rgba(26,22,18,0.6); backdrop-filter: blur(6px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal { background: var(--warm-white); border-radius: var(--radius); padding: 24px; max-width: 400px; width: 100%; position: relative; }
-.modal-close { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--cream); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.package-list { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
-.package-item { border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-.package-item:hover { border-color: var(--gold); background: rgba(201,169,110,0.05); }
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--ink); color: var(--cream); padding: 10px 20px; border-radius: 999px; font-size: 12.5px; z-index: 999; transition: transform 0.3s; }
-.toast.show { transform: translateX(-50%) translateY(0); }
-.spinner { width: 14px; height: 14px; border: 2px solid rgba(247,243,238,0.3); border-top-color: var(--cream); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; margin-right: 6px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes slide-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-</style>
-</head>
-<body>
-
-<div class="topbar">
-  <div class="topbar-logo">✦ <span>Get</span> Oracle</div>
-  <div class="topbar-right" id="topbarRight">
-    <div id="authLoading" style="font-size:12px; color:var(--ink-muted);"><div class="spinner"></div> กำลังเปิดตำราดวงของท่าน...</div>
-  </div>
-</div>
-
-<div class="hero">
-  <div class="hero-eyebrow">✦ Oracle Reading ✦</div>
-  <h1 class="hero-title">ดวงชะตาบอก<em>อะไร</em>?</h1>
-  <p class="hero-sub">ตั้งจิตอธิษฐานแล้วเลือกไพ่ด้วยตัวเอง สื่อจิตถึงแม่หมอเห็ดฟาง ✦</p>
-</div>
-
-<div class="checkin-banner" id="checkinBanner" style="display:none">
-  <div class="checkin-card">
-    <div class="checkin-info">
-      <strong>☀️ รับพรประจำวันเพื่อสะสมแต้ม</strong>
-      <span>คลิกรับสิทธิ์ฟรีได้วันละ 1 ครั้งเท่านั้น</span>
-    </div>
-    <button class="btn btn-gold" id="checkinBtn" onclick="doCheckin()">รับแต้มประจำวัน +1</button>
-  </div>
-</div>
-
-<div class="section-tabs" id="modeTabs" style="display:none">
-  <button class="tab-btn active" id="tab-daily" onclick="setMode('daily')">
-    <span class="tab-icon">🔮</span>
-    <span class="tab-label">ทำนายรายวัน</span>
-    <span class="tab-cost">ใช้ 1 แต้ม</span>
-  </button>
-  <button class="tab-btn" id="tab-weekly" onclick="setMode('weekly')">
-    <span class="tab-icon">🌙</span>
-    <span class="tab-label">ทำนายรายสัปดาห์</span>
-    <span class="tab-cost">ใช้ 3 แต้ม</span>
-  </button>
-  <button class="tab-btn" id="tab-qa" onclick="setMode('qa')">
-    <span class="tab-icon">💬</span>
-    <span class="tab-label">ถาม-ตอบแม่หมอ</span>
-    <span class="tab-cost">ใช้ 3 แต้ม</span>
-  </button>
-</div>
-
-<div class="reading-zone">
-  <div id="modeDaily" class="mode-container active-mode">
-    <div class="question-selector" id="questionSelector" style="display:none">
-      <div class="qs-title">✦ ขั้นตอนที่ 1: เลือกหมวดหมู่เรื่องที่ต้องการถามชะตา</div>
-      <div class="qs-grid">
-        <button class="qs-btn" id="qs-finance" onclick="selectCategory('finance')"><span class="qs-icon">💰</span><span class="qs-label">การเงิน</span></button>
-        <button class="qs-btn" id="qs-work" onclick="selectCategory('work')"><span class="qs-icon">💼</span><span class="qs-label">การงาน</span></button>
-        <button class="qs-btn" id="qs-love" onclick="selectCategory('love')"><span class="qs-icon">🌹</span><span class="qs-label">ความรัก</span></button>
-        <button class="qs-btn" id="qs-luck" onclick="selectCategory('luck')"><span class="qs-icon">⭐</span><span class="qs-label">โชคลาภ</span></button>
-      </div>
-    </div>
-
-    <div id="dailyInteractiveDeckZone" class="deck-wrapper" style="display:none;">
-      <div class="deck-title">✦ ขั้นตอนที่ 2: ตั้งสมาธิจิ้มเลือกไพ่ที่ดึงดูดท่านมากที่สุด 1 ใบ</div>
-      <div class="interactive-deck" id="dailySelectDeck"></div>
-    </div>
-
-    <div id="dailyResult" style="display:none"></div>
-  </div>
-
-  <div id="modeWeekly" class="mode-container">
-    <div id="weeklyInteractiveDeckZone" class="deck-wrapper" style="display:none;">
-      <div class="deck-title" id="weeklyDeckTitle">✦ ตั้งสมาธิจิ้มเลือกไพ่ 3 ใบ เพื่อประกอบคำทำนายภาพรวม</div>
-      <div class="interactive-deck" id="weeklySelectDeck"></div>
-    </div>
-    <div id="weeklyResult" style="display:none"></div>
-  </div>
-
-  <div id="modeQa" class="mode-container">
-    <div class="qa-box">
-      <div class="qa-title">💬 ส่งคำถามฝากดวงถึงแม่หมอเห็ดฟาง</div>
-      <div class="qa-subtitle">พิมพ์คำถามให้ชัดเจน ละเอียด คัดกรองผ่านจิต · ใช้ 3 แต้ม</div>
-      <textarea class="qa-input" id="qaInput" placeholder="พิมพ์คำถามตรงนี้... แม่หมอจะมาตอบสาส์นลับให้ด้านล่างค่ะ"></textarea>
-      <button class="btn-read" id="qaBtn" onclick="handleQaAsk()" style="max-width:100%">✨ ส่งคำถามฝากแม่หมอ</button>
-      <div class="qa-history" id="qaHistory"></div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="loginModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
-    <div class="modal-title" style="font-family:var(--font-display); font-size:18px; font-weight:600; text-align:center; margin-bottom:4px;">ยินดีต้อนรับสู่ Get Oracle</div>
-    <div class="modal-sub" style="text-align:center; margin-bottom:16px; font-size:12px; color:var(--ink-muted);">ระบุอีเมลและเบอร์โทรเพื่อล็อกอินหรือบันทึกข้อมูลแต้มของท่าน</div>
-     
-    <div style="margin-bottom:10px;">
-      <input type="email" id="loginEmail" placeholder="ระบุอีเมลของท่าน (เช่น name@gmail.com)" style="width:100%; padding:11px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--cream); font-size:13px;">
-    </div>
-    <div style="margin-bottom:16px;">
-      <input type="tel" id="loginPhone" placeholder="ระบุเบอร์โทรศัพท์ (เช่น 08XXXXXXXX)" style="width:100%; padding:11px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--cream); font-size:13px;">
-    </div>
-     
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <button class="btn btn-dark" style="width:100%; padding:12px; font-size:13px; justify-content:center;" id="loginBtnReal" onclick="doLogin()">🔓 เข้าสู่ระบบสมาชิก</button>
-      <button class="btn btn-gold" style="width:100%; padding:12px; font-size:13px; justify-content:center;" id="regBtnReal" onclick="doRegister()">✨ สมัครใหม่ (รับฟรี 3 แต้ม)</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="topupModal">
-  <div class="modal" id="topupModalContent"></div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbybH7Qy4qWTv_yE1cg_BSJ9kmfPf9RzOE09Gx3En-FvQ0kxK-9V4QVC_8OVWsd0XetyhQ/exec"; 
-
-const state = {
-  loggedIn: false,
-  user: { name: '', email: '', phone: '' },
-  tokens: 0,
-  checkedInToday: false,
-  currentMode: 'daily',
-  selectedCategory: null,
-  weeklySelectedIndices: [],
-  currentDailyCard: null
-};
-
-// ====================================================================
-//  🔮 ฐานข้อมูลคำทำนายไพ่ออราเคิลพรีเมียม ยาวฉ่ำ จุใจ ครบถ้วน 48 ใบเด็ดขาด
-// ====================================================================
-const CARDS = [
-  { glyph: '🔮', name: 'The High Priestess', sub: 'Intuition', 
-    finance: 'ดวงกระแสการเงินวันนี้ชี้ชัดว่าให้เชื่อมั่นในลางสังหรณ์และสัญชาตญาณแรกของตัวเองเป็นหลักค่ะ มีเกณฑ์จะมีช่องทางรายได้แปลกใหม่หลั่งไหลเข้ามาอย่างเงียบเชียบ หรือได้เงินคืนจากส่วนที่คาดไม่ถึง แต่ต้องระวังอารมณ์อยากช้อปปิ้งตามความรู้สึกชั่ววูบเด็ดขาด มิฉะนั้นอาจกระเป๋ารั่วได้ง่ายๆ เลยค่ะ', 
-    work: 'ด้านหน้าที่การงานในวันนี้โดดเด่นมากในเรื่องสติปัญญา ไหวพริบ และความคิดสร้างสรรค์ เหมาะอย่างยิ่งกับผู้ที่ทำงานด้านการวิเคราะห์ วิจัย คอนเทนต์ หรือการแก้โจทย์ปัญหาซับซ้อนที่ผู้อื่นทำไม่ได้ ทว่าให้ระวังการเก็บความลับในโปรเจกต์สำคัญ อย่าเพิ่งป่าวประกาศจนกว่างานจะประกาศผลสำเร็จค่ะ', 
-    love: 'สภาวะหัวใจในวันนี้เน้นไปที่ความเงียบสงบแต่เต็มไปด้วยความเข้าใจลึกซึ้ง คนมีคู่ระวังความคิดมากหรือความน้อยใจเกินเหตุพัดพาให้ตึงเครียด แนะนำให้คุยกันเบาๆ ส่วนคนโสดช่วงนี้เสน่ห์แรงแบบเงียบๆ มีคนแอบส่งสายตาความรู้สึกดีๆ มาให้โดยที่คุณอาจจะรู้ตัวหรือไม่รู้ตัวค่ะ', 
-    luck: 'โชคลาภวันนี้โดดเด่นจากสิ่งลี้ลับหรือลางบอกเหตุในฝันอันแม่นยำ เลขนำโชคประจำชะตาคือ 7 และ 2 ค่ะ', 
-    advice: 'แนะนำให้ทำสมาธิเงียบๆ นิ่งสงบฟังสัญญาณเตือนในใจ อย่าปล่อยให้อารมณ์ร้อนรนของคนรอบข้างมาชี้นำทิศทางชีวิตในวันนี้ เดินเกมช้าๆ แต่ชัวร์จะได้รับผลประโยชน์สูงสุดค่ะ' },
-  { glyph: '☀️', name: 'The Sun', sub: 'Radiance', 
-    finance: 'ดวงชะตาการเงินเจิดจ้าสดใสที่สุดในกระดานไพ่ทั้งหมดเลยค่ะ! ประตูทรัพย์เปิดกว้าง มีเกณฑ์จะได้รับเงินก้อนโต มีลาภลอยจากการเสี่ยงโชค หรือได้รับผลตอบแทนจากการลงทุนที่งอกเกี่ยวงดงาม หากมีปัญหาตึงมือเรื่องเงินมาก่อนหน้านี้ วันนี้ทุกอย่างจะคลี่คลายสบายใจหายห่วงแน่นอนค่ะ', 
-    work: 'การงานพุ่งทะยานสู่ความสำเร็จที่ยิ่งใหญ่ โปรเจกต์ที่มุ่งมั่นตั้งใจทำจะได้รับการอนุมัติ ปัญหาและอุปสรรคขัดขวางใดๆ ที่เคยสะดุดจะเคลียร์จบลงอย่างราบรื่น คุณจะเป็นจุดเด่นที่ได้รับความชื่นชมและได้รับการซัพพอร์ตจากเจ้านายและเพื่อนร่วมงานในองค์กรอย่างท่วมท้นในวันนี้ค่ะ', 
-    love: 'ความสัมพันธ์ในวันนี้เบ่งบานสดใส อบอุ่น และมีความสุขสูงมาก คนมีคู่แฟนรักแฟนหลง มีโอกาสได้ทำกิจกรรมพิเศษร่วมกันเพื่อเติมพลังใจ ส่วนคนโสดเนื้อหอมขั้นสุด เสน่ห์ดึงดูดผู้คนให้เข้ามารุมล้อมรอบตัว มีสิทธิ์จะได้พบเจอคนถูกใจสายเปย์ที่พร้อมเข้ามาดูแลหัวใจค่ะ', 
-    luck: 'โชคดีและสิ่งเป็นมงคลวิ่งเข้าหาตัวแบบไม่ต้องพยายามเหนื่อยแรง ทำอะไรก็ราบรื่นสำเร็จง่ายดายไปหมดค่ะ', 
-    advice: 'เมื่อดวงเปิดกว้างเต็มที่แล้ว แนะนำให้คุณเดินหน้าลุยโปรเจกต์สำคัญหรือเข้าไปเจรจาสิ่งที่คาดหวังได้เลยทันที ความมั่นใจและรอยยิ้มพิมพ์ใจของคุณในวันนี้จะเป็นกุญแจทองสร้างความสำเร็จค่ะ' },
-  { glyph: '⭐', name: 'The Star', sub: 'Hope', 
-    finance: 'ทิศทางการเงินเริ่มมองเห็นแสงสว่างทางออกที่งดงามหลังจากตึงมือมาสักระยะ แผนสร้างรายได้เสริมระยะยาวกำลังเริ่มออกดอกออกผลให้ชื่นใจ มีเงินหมุนเวียนคล่องตัวมากขึ้น และอาจได้รับเงินช่วยเหลือสนับสนุนจากผู้ใหญ่ใจดีเข้ามาช่วยเติมเต็มในส่วนที่ขาดค่ะ', 
-    work: 'ช่วงเวลาแห่งการฟื้นตัวและเริ่มต้นใหม่อย่างมีไฟ ไอเดียสดใหม่ที่คุณนำเสนอจะได้รับการยอมรับและชื่นชมอย่างสูง เหมาะกับการเริ่มต้นเรียนรู้ทักษะใหม่หรือวางแผนโปรเจกต์อนาคต พลังใจเต็มเปี่ยมพร้อมก้าวข้ามทุกปัญหาอุปสรรคการงานได้อย่างนุ่มนวลค่ะ', 
-    love: 'เป็นวันแห่งการเยียวยาแผลใจที่ดีเยี่ยม คนมีคู่ที่เคยบาดหมางหรือเข้าใจผิดกันจะกลับมาหันหน้าปรับความเข้าใจกันด้วยพลังบวกอันงดงาม ส่วนคนโสดบอกเลยว่าความหวังครั้งใหม่มาถึงแล้ว ชะตาจัดสรรคนดี เคมีบริสุทธิ์เข้ามาผ่อนคลายความเหงาในใจชวนให้กระชุ่มกระชวยค่ะ', 
-    luck: 'ความเครียดสะสมลดลง อุปสรรครอบตัวสลายตัวอย่างน่าอัศจรรย์ มีดวงผู้ใหญ่อุปถัมภ์ค้ำชูเด่นชัดมากค่ะ', 
-    advice: 'จงปล่อยวางความทุกข์และความกังวลในอดีตทิ้งไปได้เลยค่ะ ชะตาชีวิตของคุณกำลังก้าวเข้าสู่แดนสว่างอันสงบสุข หมั่นคิดบวก สวดมนต์หรือแผ่เมตตาเพื่อเปิดรับพลังงานดีๆ และโชคลาภที่กำลังจะเข้ามานะคะ' },
-  { glyph: '🚀', name: 'The Rocket', sub: 'Acceleration', 
-    finance: 'ดวงการเงินเคลื่อนไหวรวดเร็วและพุ่งทะยานแรงมาก มีเกณฑ์จะได้รับเงินก้อนจากความไวในการคว้าโอกาสทอง หรือได้รับกำไรระยะสั้นจากการเก็งกำไรและเทรดหุ้นอย่างรวดเร็ว อย่างไรก็ตามเมื่อเงินเข้าเร็วก็อาจจะออกไวจากการวู่วามเปย์ แนะนำให้ล็อคเงินเก็บทันทีค่ะ', 
-    work: 'หน้าที่การงานเดินหน้าแบบก้าวกระโดดไฟลุก โปรเจกต์สเกลใหญ่ที่คุณซุ่มเตรียมการมานานกำลังจะได้เวลา Launch สู่ตลาดอย่างเป็นทางการ คุณจะได้รับแรงสนับสนุนให้ขึ้นแท่นเป็นผู้นำทีมหรือได้รับมอบหมายงานด่วนสำคัญที่แสดงศักยภาพขั้นเทพให้ทุกคนประจักษ์ค่ะ', 
-    love: 'ความสัมพันธ์พัฒนาไปอย่างรวดเร็วปานสายฟ้าแลบ คนมีคู่จะมีการขยับสถานะหรือตกลงใจทำอะไรเซอรไพร์สร่วมกันอย่างปุบปับ ส่วนคนโสดระวังหัวใจเต้นผิดจังหวะ มีเกณฑ์จะเดินทางไปเจอคนถูกใจสไตล์สายสปาร์ก เจอปุ๊บรักปั๊บดึงดูดเข้าหากันทันทีเลยค่ะ', 
-    luck: 'ดวงโชคลาภมาแบบก้าวกระโดด ยิ่งคุณทำตัวกระตือรือร้นและแอคทีฟมากเท่าไหร่ โชคลาภยิ่งวิ่งพุ่งเข้าหาตัวเร็วเท่านั้นค่ะ', 
-    advice: 'ความรวดเร็วและเด็ดขาดคือกุญแจสำคัญของวันนี้ค่ะ หากเจอลู่ทางธุรกิจหรือโอกาสเติบโตเรื่องงาน ให้รีบพุ่งตัวคว้าทันที ห้ามลังเลหรือผัดวันประกันพรุ่งเด็ดขาด ชักช้าเพียงเสี้ยววินาทีอาจจะเสียลาภก้อนโตได้ค่ะ' },
-  { glyph: '⚡', name: 'The Lightning', sub: 'Disruption', 
-    finance: 'เตือนภัยชะตาการเงินผันผวนฉับพลันในวันนี้ มีเกณฑ์จะต้องควักเงินจ่ายจ่ายกะทันหันกับเรื่องที่ไม่ได้วางแผนไว้ล่วงหน้า เช่น อุปกรณ์ไอทีพังเสียหาย ระบบไฟในบ้านมีปัญหา หรือค่ารักษาพยาบาลค่ายาฉุกเฉิน วันนี้งดการลงทุนความเสี่ยงสูงหรืองดการให้ยืมเงินทุกกรณีค่ะ', 
-    work: 'การงานเจอกลไกการเปลี่ยนแปลงพลิกโผแบบไม่ทันตั้งตัว งานด่วนแทรกแซงหรือระบบงานค้างสะดุดกลางคัน อย่าเพิ่งตื่นตระหนกตกใจไปค่ะ ไพ่ใบนี้บอกว่านี่คือโอกาสดีที่สุดที่คุณจะได้รื้อระบบเก่าที่เอ๋อทิ้งไป เพื่อวางรากฐานโครงสร้างงานใหม่ที่ปังและมั่นคงกว่าเดิม', 
-    love: 'ดวงความรักต้องระมัดระวังคำพูดและอารมณ์ชั่ววูบระเบิดใส่กันอย่างรุนแรง ลิ้นกับฟันกระทบกันได้ง่ายเพราะความเครียดสะสม แนะนำให้แยกย้ายกันไปสงบสติอารมณ์ ส่วนคนโสดระวังเจอความสัมพันธ์สแกมเมอร์แบบเข้ามาไว หวานไว แล้วก็หายวับไปไวเช่นกันค่ะ', 
-    luck: 'ดวงโชคลาภผกผันฉับพลัน สิ่งที่คุณคิดว่าจะเสียหรือพลาดไปแล้ว อาจพลิกโผกลับมาให้โชคใหญ่ในรูปแบบอื่นภายหลังค่ะ', 
-    advice: 'สติคำเดียวเท่านั้นที่จะปกป้องคุณได้ในวันนี้ค่ะ ระวังการใช้อารมณ์ตัดสินปัญหาฉับพลัน หากเจอเรื่องตื่นเต้นหรือคำพูดแทงใจ ให้หยุดหายใจเข้าลึกๆ นับ 1-10 ในใจก่อนที่จะสวนตอบกลับไป จะช่วยบรรเทาเคราะห์ร้ายได้ดีเยี่ยมค่ะ' },
-  { glyph: '🛡️', name: 'The Firewall', sub: 'Protection', 
-    finance: 'การเงินอยู่ในเกณฑ์ปลอดภัย มั่งคั่ง มั่นคงดีมากค่ะ เหมาะสมที่สุดสำหรับการวางแผนเก็บออมเงิน ตั้งงบประมาณรายจ่ายจำกัดจำเขี่ยเพื่อสร้างรากฐานทรัพย์ วันนี้ไม่เหมาะสมกับการนำเงินไปเสี่ยงโชค เสี่ยงลงทุนเด็ดขาด เน้นความปลอดภัยเงียบๆ จะดีที่สุดค่ะ', 
-    work: 'เป็นช่วงเวลาที่ต้องใช้ความเหนียวแน่นรอบคอบในการทำงาน ตรวจสอบระบบงาน เช็กความถูกต้องของเอกสารสัญญาให้ดีระวังบั๊กหรือความผิดพลาดเล็กๆ ซ่อนอยู่ นอกจากนี้คุณมีเกณฑ์จะต้องออกโรงปกป้องผลประโยชน์หรือลิขสิทธิ์ผลงานของตัวเองจากการโดนเคลมค่ะ', 
-    love: 'ความสัมพันธ์ในวันนี้ดำเนินไปด้วยความเสถียร ต่างฝ่ายต่างให้เกียรติและมีพื้นที่ส่วนตัว (Space) ที่ปลอดภัยให้กันและกัน ไม่ก้าวก่ายอึดอัดจนเกินไป ส่วนคนโสดยังคงแฮปปี้กับการตั้งกำแพงป้องกันหัวใจตัวเอง ขอเลือกความสงบไม่เอาความสัมพันธ์ที่เป็นพิษเข้ามาค่ะ', 
-    luck: 'ดวงโชคลาภปานกลาง ความโชคดีสูงสุดในวันนี้คือการที่ไม่ต้องสูญเสียทรัพย์สินเงินทอง และขจัดภัยรอบตัวออกไปได้ค่ะ', 
-    advice: 'เน้นความปลอดภัยและชัวร์ไว้ก่อนเป็นอันดับแรกค่ะ งดการเซ็นค้ำประกันหรืองดการร่วมทุนกับคนแปลกหน้าที่โปรไฟล์ดูดีเกินจริง ตรวจทานระบบระเบียบชีวิตให้แน่นหนา แล้วคุณจะผ่านวันนี้ไปได้อย่างไร้รอยขีดข่วนค่ะ' },
-  { glyph: '⚙️', name: 'The Algorithm', sub: 'Logic & Order', 
-    finance: 'กระแสเงินทองไหลเวียนราบรื่นตามแผนการที่จัดสรรไว้เป๊ะๆ รายรับรายจ่ายสมดุลลงตัวดีมากเพราะคุณควบคุมมันด้วยสติและเหตุผลอันชาญฉลาด ไม่ใช่การจ่ายตามอารมณ์ มีเกณฑ์จะได้รับเงินตามงวดระบบ หรือได้ช่องทางเก็บออมที่ปลอดภัยดอกเบี้ยดีค่ะ', 
-    work: 'หน้างานในวันนี้ต้องการตรรกะ โครงสร้าง และลำดับขั้นตอนที่ชัดเจนเป็นระบบสูงสุด เหมาะกับการจัดระเบียบตารางงาน สะสางงานรูทีนหรืองานเอกสารตัวเลขที่คั่งค้าง ทำงานตามหน้าที่ให้เป๊ะตามระเบียบแล้วผลงานจะออกมาเนี๊ยบจนไม่มีใครกล้าติเลยค่ะ', 
-    love: 'ความรักความสัมพันธ์ราบเรียบ ไร้เรื่องดราม่าหวือหวาแต่มั่นคงสูงมาก เน้นการพูดคุยช่วยเหลือกันด้วยเหตุและผล วางแผนอนาคตร่วมกันอย่างเป็นรูปธรรม ส่วนคนโสดเด่นชัดว่าใช้สมองนำทางหัวใจ คัดกรองคนคุยด้วยเกณฑ์มาตรฐานความจริงใจ ไม่หลงคารมใครง่ายๆ', 
-    luck: 'ดวงลาภลอยอยู่ในระดับกลางๆ โชคลาภจะมาจากสถิติ ตัวเลขการคำนวณ หรือเลขรหัสระบบที่คุณวิเคราะห์มาอย่างดีค่ะ', 
-    advice: 'งดการใช้ความรู้สึกหรืออารมณ์น้อยใจในการตัดสินปัญหากับผู้คน จัดระเบียบโต๊ะทำงานและตารางชีวิตให้เรียบร้อย พลังงานแห่งความเป๊ะและเป็นระบบระเบียบจะช่วยเปิดดวงดูดทรัพย์ก้อนโตเข้าหาคุณค่ะ' },
-  { glyph: '🌐', name: 'The Network', sub: 'Connection', 
-    finance: 'ชะตาเงินทองโดดเด่น ไหลบ่ามาจากหลากหลายช่องทางพร้อมๆ กัน โดยเฉพาะรายได้ที่มาจากงานประสานงาน ค้าขายออนไลน์ หรือการทำธุรกิจกับคนหมู่มากและลูกค้าต่างชาติต่างแดน มีเกณฑ์จะได้ยอดปังออเดอร์เด้งรัวๆ เงินเข้ากระเป๋าตุงเลยค่ะ', 
-    work: 'วันแห่งทองคำของคอนเนกชันและการเข้าสังคม! การออกไปประชุม พบปะผู้คน หรือเจรจาธุรกิจในวันนี้จะประสบความสำเร็จสูงมาก คุณจะได้พบกัลยาณมิตรหรือพันธมิตรหน้าใหม่ที่โปรไฟล์เริส เข้ามาขี่ม้าขาวช่วยผลักดันให้โปรเจกต์ของคุณสำเร็จลุล่วง', 
-    love: 'คนมีคู่ความสัมพันธ์ซัพพอร์ตกันดีเยี่ยม คนรักจะช่วยชี้ช่องทางหรือแนะนำคอนเนกชันดีๆ มาช่วยหนุนการงานของคุณให้เติบโต ส่วนคนโสดมีเกณฑ์หัวใจเต้นแรงเพราะเพื่อนฝูงหรือสังคมออนไลน์พัดพาคนน่าสนใจ โปรไฟล์ดี เคมีตรงกันมาให้ทำความรู้จักค่ะ', 
-    luck: 'ดวงเฮง มีโชคลาภและโอกาสทองเดินทางมาจากคนไกล หรือได้ข้อมูลลับเด็ดๆ มาจากคอนเนกชันในสังคมออนไลน์ค่ะ', 
-    advice: 'อย่าเก็บตัวอยู่แต่ในห้องสี่เหลี่ยมเด็ดขาดค่ะ! วันนี้แนะนำให้เปิดใจกว้างๆ โพสต์สื่อสารบนโลกออนไลน์ หรือออกไปเจอผู้คน สังคม คอนเนกชันที่ขยายตัวในวันนี้จะนำพาความร่ำรวยและโอกาสทองมาให้คุณในอนาคตอันใกล้ค่ะ' },
-  { glyph: '⏳', name: 'The Buffer', sub: 'Patience', 
-    finance: 'กระแสการเงินในวันนี้ค่อนข้างทรงตัว นิ่งๆ เงียบๆ รายรับหรือเงินที่คุณกำลังเฝ้ารอคอยอยู่อาจจะมีเกณฑ์ดีเลย์คลาดเคลื่อนเรื่องเวลาไปบ้างเล็กน้อย แต่บอกเลยว่าไม่ได้สูญหายไปไหนแน่นอนค่ะ แค่ต้องรอจังหวะเวลาเคลียร์ระบบอีกนิด ได้รับครบถ้วนแน่นอน', 
-    work: 'โปรเจกต์และการงานตกอยู่ในสภาวะชะลอตัวเพื่อรอดึงข้อมูลหรือรอการอนุมัติไฟเขียวจากผู้ใหญ่ อย่าเพิ่งใจร้อนรนเร่งรีบพุ่งชนปัญหา แนะนำให้ใช้จังหวะที่งานเฉื่อยลงนี้ในการทบทวน ตรวจทานรายละเอียดชิ้นงานให้เนี๊ยบละเอียดที่สุดเพื่ออุดรอยรั่วค่ะ', 
-    love: 'ความสัมพันธ์ดูทรงๆ นิ่งๆ เหมือนต่างฝ่ายต่างกำลังดูท่าทีและรอสเต็ปถัดไปในการขยับสถานะ ส่วนคนโสดแนะนำให้ใจเย็นๆ สโลว์ไลฟ์ ศึกษาดูใจนิสัยใจคอกันไปเรื่อยๆ ก่อน อย่าเพิ่งรีบร้อนรวบรัดตัดตอนความสัมพันธ์พาลจะอึดอัดแยกย้ายกันไปค่ะ', 
-    luck: 'ดวงโชคลาภมาแบบเฉื่อยชาช้าๆ ชะตาชีวิตบอกว่าโชคร้ายจะพลิกกลายเป็นดีอย่างงดงาม หากคุณรู้จักอดทนรอคอยจังหวะค่ะ', 
-    advice: 'ท่องคำว่า อดทน และ ใจเย็น เอาไว้ให้ขึ้นใจในวันนี้ค่ะ อย่าเพิ่งหัวเสียหรือเหวี่ยงวีนใส่ใครเมื่ออะไรๆ ไม่ได้ดั่งใจในทันที จังหวะชีวิตตอนนี้ช้าแต่ชัวร์ ปล่อยให้เวลาทำงานไปตามธรรมชาติแล้วผลลัพธ์ตอนจบจะงดงามคุ้มค่าค่ะ' },
-  { glyph: '💎', name: 'The Premium', sub: 'Value', 
-    finance: 'ดวงชะตามหาเศรษฐีหยิบจับอะไรก็แปรเปลี่ยนเป็นเงินเป็นทองงอกเงยงดงามค่ะ! มีเกณฑ์จะได้รับทรัพย์สินก้อนโต ได้รับของขวัญหรูหรามีราคา ของแบรนด์เนม หรือได้รับเงินปันผลก้อนใหญ่จากผลงานชิ้นเอกที่คุณทุ่มเทลงแรงทำมานาน ยอดเงินในบัญชีพุ่งพ้นขีดจำกัดค่ะ', 
-    work: 'ผลงานและศักยภาพของคุณโดดเด่นเจิดจรัสจนได้รับคำชมและรางวัลเกียรติยศระดับยอดเยี่ยม มีโอกาสทองที่จะได้รับการอัปเกรดตำแหน่งหน้าที่ คุมโปรเจกต์พรีเมียมสเกลใหญ่ที่มีงบประมาณสูง หรือได้รับการทาบทามซื้อตัวด้วยค่าตอบแทนที่สูงลิ่วเกินคาดค่ะ', 
-    love: 'คนมีคู่แฟนของคุณดูแลเอาใจใส่และเกรงใจคุณดีมากราวกับคุณเป็นเจ้าหญิงเจ้าชายในชีวิตคู่ พร้อมเปย์ของขวัญถูกใจให้ชื่นฉ่ำ ส่วนคนโสดเตรียมตัวสละโสดได้เลย มีเกณฑ์พบคู่แท้โปรไฟล์เลิศ ฐานะร่ำรวย หน้าตาทางสังคมดีเยี่ยมเข้ามาขายขนมจีบสายเปย์สุดๆ ค่ะ', 
-    luck: 'ดวงเฮงดีเลิศอันดับหนึ่ง มีเกณฑ์ได้รับลาภลอยฟลุ๊คๆ ชิ้นใหญ่ หรือได้รับสิทธิ์โอกาสพิเศษเหนือระดับที่น้อยคนจะได้ครอบครองค่ะ', 
-    advice: 'ถึงเวลาแล้วที่คุณจะต้องเห็นคุณค่า มั่นใจ และภูมิใจในตัวเองสูงสุด ห้ามถ่อมตัวจนยอมลดมาตรฐานสิทธิ์ที่ควรได้ เรียกราคาและแสดงศักยภาพระดับพรีเมียมออกไปให้เต็มที่ ชะตาชีวิตชี้ชัดว่าคุณคู่ควรกับสิ่งที่ดีที่สุดเท่านั้นค่ะ' }
-];
-
-// สร้างไพ่ใบที่ 11 - 48 ให้ครบถ้วนสมบูรณ์โครงสร้างพรีเมียม
-const GLYPHS = ['🔋','🧩','🗝️','🍃','🛸','📉','🔄','📡','🔥','🛰️','👑','🕳️','🧪','🧱','🧊','🎯','🧭','🎭','⚖️','🌪','🌾','🌋','🎈','🧱','🪫','🕯️','🧬','⚓','🧲','⛓️','🏹',' BRIDGE','🏆','🧩','🛸','🌌','🧿','🏁'];
-const NAMES = ['The Battery','The Puzzle','The Master Key','The Cloud','The Unknown','The System Crash','The Reboot','The Satellite','The Overheat','The Deep Space','The Admin','The Black Hole','The Alchemist','The Sandbox','The Frozen','The Target','The Navigator','The Glitch','The Smart Contract','The Chaos','The Harvest','The Eruption','The Float','The Foundation','The Low Battery','The Spark','The Evolution','The Anchor','The Magnet','The Chain','The Archer','The Bridge','The Legend','The Missing Piece','The Mothership','The Cosmos','The Quantum Fate','The Finish Line'];
-const SUBS = ['Recharge','Problem Solving','Access','Freedom','Mystery','Overload','Starting Over','Perspective','Burnout','Isolation','Authority','Drain','Transformation','Testing','Stagnation','Focus','Guidance','Illusion','Fairness','Unpredictable','Reward','Release','Lightness','Security','Drain','Inspiration','Adaptation','Security','Attraction','Restriction','Preparation','Transition','Legacy','Completion','Gathering','Infinite','Karma','Achievement'];
-
-for(let i=0; i<38; i++){
-  CARDS.push({
-    glyph: GLYPHS[i], name: NAMES[i], sub: SUBS[i],
-    finance: `ชะตาทรัพย์สินของไพ่ ${NAMES[i]} ระบุชัดเจนว่าสถานการณ์การเงินกำลังเคลื่อนตัวไปข้างหน้าอย่างมั่นคง ทรัพย์สินและสภาพคล่องทางบัญชีหมุนเวียนไหลลื่นตามเป้า มีช่องทางเก็บเงินอุดรอยรั่วได้อย่างมีระเบียบวินัย แนะนำให้ทำบัญชีรายรับรายจ่ายอย่างจริงจังจะช่วยดึงโชคทรัพย์ก้อนโตเข้ามาเสริมความร่ำรวยค่ะ`,
-    work: `ทางด้านการงานของไพ่ ${NAMES[i]} บ่งบอกถึงจังหวะชีวิตที่จะต้องใช้สติปัญญาและสมาธิจดจ่อกับเป้าหมายอย่างเด็ดเดี่ยว ปัญหาที่เคยติดขัดหรือเจรจาไม่จบจะได้รับความช่วยเหลือจากกัลยาณมิตรหรือเพื่อนร่วมทีมเข้ามาช่วยเคลียร์จนผ่านพ้นได้อย่างงดงาม ถือเป็นวันปล่อยของที่ทำให้คุณมีผลงานชิ้นสำคัญค่ะ`,
-    love: `ความสัมพันธ์และความรักของไพ่ ${NAMES[i]} ในเวลานี้เน้นไปที่ความอบอุ่นและถนอมน้ำใจกัน คนมีคู่ช่วยกันเป็นที่ปรึกษาเยียวยาจิตใจและซัพพอร์ตพลังชีวิตให้กันอย่างน่าอิจฉา ส่วนคนโสดยังคงเลือกที่จะรักตัวเองและเคลียร์พลังงานลบในอดีตออกไป พร้อมเปิดรับคนที่จริงใจและเคมีตรงกันเข้ามาในเร็ววันค่ะ`,
-    luck: `ดวงโชคลาภวาสนาโดดเด่นพึ่งพาได้ ลางสังหรณ์แม่นยำจะนำพาโอกาสทองและตัวเลขมงคลเข้ามาให้คุณได้รับทรัพย์ฟลุ๊คๆ มีลุ้นรางวัลใหญ่ค่ะ`,
-    advice: `คำแนะนำประกาศิตจากพระครูของไพ่ ${NAMES[i]} สั่งว่าให้คุณรักษาระดับพลังงานบวกในใจให้บริสุทธิ์ ละเว้นคำนินทาและเรื่องดราม่ารอบตัว ยิ่งคุณส่งต่อความปรารถนาดีและทำบุญบริจาคทานมากเท่าไหร่ ประตูแห่งความโชคดีและทรัพย์สมบัติมหาศาลจะยิ่งเปิดทางวิ่งเข้าหากระเป๋าเงินคุณทันทีค่ะ`
-  });
-}
-
-const WEEKLY_COMBOS = [
-  { cards: [CARDS[0], CARDS[1], CARDS[2]] }
-];
-
-// ==========================================
-//  🔓 AUTOMATIC RE-LOGIN LOGIN SYSTEM
-// ==========================================
-window.addEventListener('DOMContentLoaded', () => {
-  checkSavedLogin();
-});
-
-function checkSavedLogin() {
-  const savedEmail = localStorage.getItem('oracle_email');
-  const savedPhone = localStorage.getItem('oracle_phone');
-  
-  if (savedEmail && savedPhone) {
-    autoLogin(savedEmail, savedPhone);
-  } else {
-    showGuestTopbar();
-  }
-}
-
-function showGuestTopbar() {
-  document.getElementById('topbarRight').innerHTML = `
-    <button class="btn btn-outline" onclick="openModal('loginModal')">เข้าสู่ระบบ</button>
-    <button class="btn btn-gold" onclick="openModal('loginModal')">สมัครฟรี ✨</button>
-  `;
-}
-
-async function autoLogin(email, phone) {
-  const res = await callAPI({ action: "login", email, phone });
-  if (res && res.success) {
-    state.loggedIn = true; state.tokens = res.tokens;
-    state.user = { name: email.split('@')[0], email, phone };
-    state.checkedInToday = res.checkedIn; // ตรวจสอบค่าสถานะเช็กอินจริงจากดาต้าเบสสคริปต์กูเกิล
-    updateUI(); fetchQaUpdates();
-    showToast('🔓 ดึงข้อมูลดวงชะตาอัตโนมัติเรียบร้อยค่ะ', 'success');
-  } else {
-    localStorage.removeItem('oracle_email');
-    localStorage.removeItem('oracle_phone');
-    showGuestTopbar();
-  }
-}
-
-async function doRegister() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const phone = document.getElementById('loginPhone').value.trim();
-  if (!email || !phone) { showToast('กรุณากรอกข้อมูลให้ครบถ้วนค่ะ', 'error'); return; }
-  
-  const b1 = document.getElementById('loginBtnReal'); const b2 = document.getElementById('regBtnReal');
-  b1.disabled = true; b2.disabled = true;
-  b2.innerHTML = '<div class="spinner"></div> ลงทะเบียน...';
-  
-  const res = await callAPI({ action: "register", email, phone });
-  if (res && res.success) {
-    localStorage.setItem('oracle_email', email);
-    localStorage.setItem('oracle_phone', phone);
-
-    state.loggedIn = true; state.tokens = res.tokens;
-    state.user = { name: email.split('@')[0], email, phone };
-    
-    // 🔥 [แก้ไขบั๊กจุดตายสำเร็จ] ลูกค้าใหม่แกะกล่องต้องตั้งค่าเป็น false เสมอเพื่อให้มีสิทธิ์กดรับแต้มเอง!
-    state.checkedInToday = false; 
-    
-    closeModal('loginModal'); updateUI();
-    showToast('🎉 สมัครสมาชิกสำเร็จ รับแต้มของขวัญแรกเข้า 3 แต้มฟรีค่ะ! กดรับแต้มประจำวันเพิ่มได้เลยค่ะ', 'success');
-  } else {
-    showToast('⚠️ ' + (res ? res.message : 'เชื่อมต่อล้มเหลว'), 'error');
-    b1.disabled = false; b2.disabled = false; b2.innerHTML = '✨ สมัครใหม่';
-  }
-}
-
-async function doLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const phone = document.getElementById('loginPhone').value.trim();
-  if (!email || !phone) { showToast('กรุณากรอกข้อมูลให้ครบถ้วนค่ะ', 'error'); return; }
-  
-  const b1 = document.getElementById('loginBtnReal'); const b2 = document.getElementById('regBtnReal');
-  b1.disabled = true; b2.disabled = true;
-  b1.innerHTML = '<div class="spinner"></div> กำลังดึงดวง...';
-  
-  const res = await callAPI({ action: "login", email, phone });
-  if (res && res.success) {
-    localStorage.setItem('oracle_email', email);
-    localStorage.setItem('oracle_phone', phone);
-
-    state.loggedIn = true; state.tokens = res.tokens;
-    state.user = { name: email.split('@')[0], email, phone };
-    state.checkedInToday = res.checkedIn; // ดึงประวัติที่แท้จริงไม่สลับมั่วซั่ว
-    closeModal('loginModal'); updateUI(); fetchQaUpdates();
-    showToast('🔓 เข้าสู่ระบบเรียบร้อย ยินดีต้อนรับกลับค่ะ', 'success');
-  } else {
-    showToast('❌ ' + (res ? res.message : 'ไม่พบข้อมูล'), 'error');
-    b1.disabled = false; b2.disabled = false; b1.innerHTML = '🔓 เข้าสู่ระบบสมาชิก';
-  }
-}
-
-function doLogout() {
-  localStorage.removeItem('oracle_email');
-  localStorage.removeItem('oracle_phone');
-  location.reload();
-}
-
-async function updateServerToken(amount, reason) {
-  if (!state.loggedIn) return false;
-  const res = await callAPI({ action: "updateToken", email: state.user.email, amount, reason });
-  if (res && res.success) {
-    state.tokens = res.tokens;
-    updateTokenBadge();
-    return true;
-  }
-  return false;
-}
-
-async function doCheckin() {
-  if (state.checkedInToday) { showToast('วันนี้ท่านได้รับแต้มฟรีไปเรียบร้อยแล้วค่ะ', 'error'); return; }
-  const checkinBtn = document.getElementById('checkinBtn');
-  checkinBtn.disabled = true; checkinBtn.innerHTML = '<div class="spinner"></div>';
-  await updateServerToken(1, "เช็คอินแต้มฟรีรายวัน");
-  state.checkedInToday = true; checkinBtn.textContent = '✓ รับแล้ว';
-  showToast('☀️ เพิ่มโชค +1 แต้มสำเร็จค่ะ', 'success');
-}
-
-function setMode(mode) {
-  state.currentMode = mode;
-  ['daily', 'weekly', 'qa'].forEach(m => {
-    const el = document.getElementById('mode' + m.charAt(0).toUpperCase() + m.slice(1));
-    const tab = document.getElementById('tab-' + m);
-    if(m === mode) { el.classList.add('active-mode'); tab.classList.add('active'); } 
-    else { el.classList.remove('active-mode'); tab.classList.remove('active'); }
-  });
-  if (mode === 'weekly') generateWeeklyInteractiveDeck();
-  if (mode === 'qa') fetchQaUpdates(); 
-}
-
-// ==========================================
-//  🔮 INTERACTIVE DECK SYSTEM
-// ==========================================
-function selectCategory(cat) {
-  state.selectedCategory = cat;
-  ['finance', 'work', 'love', 'luck'].forEach(c => {
-    document.getElementById('qs-' + c).classList.toggle('selected', c === cat);
-  });
-  document.getElementById('dailyResult').style.display = 'none';
-  document.getElementById('dailyInteractiveDeckZone').style.display = 'block';
-  generateDailyInteractiveDeck();
-}
-
-function generateDailyInteractiveDeck() {
-  const deck = document.getElementById('dailySelectDeck');
-  deck.innerHTML = '';
-  for(let i=0; i<5; i++) {
-    const cardEl = document.createElement('div');
-    cardEl.className = 'tarot-card';
-    cardEl.style.zIndex = 10 + i;
-    cardEl.innerHTML = `
-      <div class="card-inner" onclick="revealDailyCard(this)">
-        <div class="card-back"><div class="card-back-pattern"></div></div>
-        <div class="card-face">
-          <div class="card-face-glyph" id="d-glyph">🔮</div>
-          <div class="card-face-name" id="d-name">Card</div>
-          <div class="card-face-sub" id="d-sub">Oracle</div>
-        </div>
-      </div>
-    `;
-    deck.appendChild(cardEl);
-  }
-}
-
-async function revealDailyCard(innerEl) {
-  if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนเลือกไพ่ค่ะ', 'error'); openModal('loginModal'); return; }
-  if (state.tokens < 1) { showToast('ยอดแต้มคงเหลือไม่เพียงพอเปิดไพ่', 'error'); openModal('topupModal'); return; }
-
-  const cardWrapper = innerEl.parentElement;
-  cardWrapper.classList.add('selected-by-user');
-  
-  const allCards = document.querySelectorAll('#dailySelectDeck .tarot-card');
-  allCards.forEach(c => c.style.pointerEvents = 'none');
-
-  await updateServerToken(-1, "เปิดไพ่เลือกเองรายวัน หมวด " + state.selectedCategory);
-
-  const realCard = CARDS[Math.floor(Math.random() * CARDS.length)];
-  state.currentDailyCard = realCard;
-
-  cardWrapper.querySelector('#d-glyph').textContent = realCard.glyph;
-  cardWrapper.querySelector('#d-name').textContent = realCard.name;
-  cardWrapper.querySelector('#d-sub').textContent = realCard.sub;
-
-  setTimeout(() => {
-    cardWrapper.classList.add('reveal-animation');
-    setTimeout(() => {
-      showDailyResult(realCard);
-      document.getElementById('dailyResult').scrollIntoView({ behavior: 'smooth' });
-    }, 800);
-  }, 400);
-}
-
-function showDailyResult(card) {
-  const cat = state.selectedCategory;
-  const catMap = { finance: { label: 'การเงิน', badge: 'badge-finance', icon: '💰' }, work: { label: 'การงาน', badge: 'badge-work', icon: '💼' }, love: { label: 'ความรัก', badge: 'badge-love', icon: '🌹' }, luck: { label: 'โชคลาภ', badge: 'badge-luck', icon: '⭐' } };
-  const cm = catMap[cat];
-  
-  document.getElementById('dailyResult').innerHTML = `
-    <div class="result-box" style="animation: slide-up 0.6s ease;">
-      <div class="result-header">
-        <div class="result-icon" style="color:white;">${card.glyph}</div>
-        <div class="result-card-name"><strong>${card.name}</strong><span>${card.sub}</span></div>
-        <div class="result-category-badge ${cm.badge}">${cm.icon} ${cm.label}</div>
-      </div>
-      <div class="result-readings">
-        <div class="result-reading-item">
-          <strong>🔮 คำทำนายดวงชะตาฉบับเจาะลึก:</strong><br><br>
-          <div class="reading-item-text">${card[cat]}</div>
-        </div>
-      </div>
-      
-      <div id="adviceZone" class="advice-lock-zone">
-        <strong>💡 ต้องการรับคำแนะนำเสริมชะตาครูเพิ่มไหมคะ?</strong>
-        <p style="font-size:11px; color:var(--ink-muted); margin-top:2px;">เจาะลึกแนวทางแก้ไขปัญหาและทริคเสริมดวงเฉพาะไพ่ใบนี้ (ใช้เพิ่ม 1 แต้ม)</p>
-        <button class="advice-btn" onclick="unlockAdvice()">🪙 ปลดล็อกคำแนะนำพิเศษ (+1 แต้ม)</button>
-      </div>
-    </div>`;
-  document.getElementById('dailyResult').style.display = 'block';
-}
-
-async function unlockAdvice() {
-  if (state.tokens < 1) { showToast('ยอดแต้มคงเหลือไม่เพียงพอปลดล็อกคำแนะนำ', 'error'); openModal('topupModal'); return; }
-  
-  const zone = document.getElementById('adviceZone');
-  zone.innerHTML = '<div class="spinner"></div> กำลังเชื่อมต่อกระแสจิตคำแนะนำ...';
-
-  const success = await updateServerToken(-1, "ซื้อคำแนะนำเพิ่มเติมไพ่ " + state.currentDailyCard.name);
-  if (success) {
-    zone.className = "result-reading-item";
-    zone.style.background = "rgba(139,168,136,0.12)";
-    zone.style.border = "1px solid var(--sage)";
-    zone.style.textAlign = "left";
-    zone.innerHTML = `
-      <strong style="color:var(--sage); font-size:14px;">🌿 คำแนะนำนำทางชีวิตจากแม่หมอเห็ดฟาง:</strong><br><br>
-      <div style="font-size:13.5px; line-height:1.7;">${state.currentDailyCard.advice}</div>
-    `;
-  }
-}
-
-// ==========================================
-//  🌙 INTERACTIVE WEEKLY SYSTEM
-// ==========================================
-function generateWeeklyInteractiveDeck() {
-  document.getElementById('weeklyResult').style.display = 'none';
-  document.getElementById('weeklyInteractiveDeckZone').style.display = 'block';
-  document.getElementById('weeklyDeckTitle').textContent = '✦ ตั้งสมาธิจิ้มเลือกไพ่หน้าคว่ำให้ครบ 3 ใบ เพื่อดูภาพรวมสัปดาห์นี้';
-  state.weeklySelectedIndices = [];
-
-  const deck = document.getElementById('weeklySelectDeck');
-  deck.innerHTML = '';
-  for(let i=0; i<7; i++) {
-    const cardEl = document.createElement('div');
-    cardEl.className = 'tarot-card';
-    cardEl.style.zIndex = 10 + i;
-    cardEl.innerHTML = `
-      <div class="card-inner" onclick="selectWeeklyCard(this, ${i})">
-        <div class="card-back"><div class="card-back-pattern"></div></div>
-        <div class="card-face">
-          <div class="card-face-glyph" id="w-glyph-${i}">🌙</div>
-          <div class="card-face-name" id="w-name-${i}">Oracle</div>
-          <div class="card-face-sub" id="w-sub-${i}">Weekly</div>
-        </div>
-      </div>
-    `;
-    deck.appendChild(cardEl);
-  }
-}
-
-async function selectWeeklyCard(innerEl, clickIndex) {
-  if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนค่ะ', 'error'); openModal('loginModal'); return; }
-  if (state.tokens < 3) { showToast('ยอดแต้มคงเหลือไม่เพียงพอเปิดคำทำนายรายสัปดาห์ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
-  
-  const cardWrapper = innerEl.parentElement;
-  if(cardWrapper.classList.contains('selected-by-user')) return;
-
-  cardWrapper.classList.add('selected-by-user');
-  state.weeklySelectedIndices.push(cardWrapper);
-
-  document.getElementById('weeklyDeckTitle').textContent = `✦ เลือกไปแล้ว ${state.weeklySelectedIndices.length} / 3 ใบ`;
-
-  if(state.weeklySelectedIndices.length === 3) {
-    const allCards = document.querySelectorAll('#weeklySelectDeck .tarot-card');
-    allCards.forEach(c => c.style.pointerEvents = 'none');
-
-    document.getElementById('weeklyDeckTitle').innerHTML = '<div class="spinner"></div> กำลังจัดวางกระแสพลังงาน...';
-    await updateServerToken(-3, "เปิดไพ่รายสัปดาห์แบบเลือกเอง 3 ใบ");
-
-    const combo = WEEKLY_COMBOS[Math.floor(Math.random() * WEEKLY_COMBOS.length)];
-    
-    state.weeklySelectedIndices.forEach((wrap, idx) => {
-      setTimeout(() => {
-        const realCard = combo.cards[idx];
-        wrap.querySelector(`[id^="w-glyph-"]`).textContent = realCard.glyph;
-        wrap.querySelector(`[id^="w-name-"]`).textContent = realCard.name;
-        wrap.querySelector(`[id^="w-sub-"]`).textContent = realCard.sub;
-        wrap.classList.add('reveal-animation');
-      }, idx * 400);
-    });
-
-    setTimeout(() => {
-      showWeeklyResult(combo);
-      document.getElementById('weeklyResult').scrollIntoView({ behavior: 'smooth' });
-    }, 1600);
-  }
-}
-
-function showWeeklyResult(combo) {
-  const cards = combo.cards;
-  document.getElementById('weeklyResult').innerHTML = `
-    <div class="result-box" style="animation: slide-up 0.8s ease; margin-top:24px;">
-      <div style="text-align:center; margin-bottom:20px; border-bottom: 1px solid var(--border); padding-bottom:12px;">
-        <h3 style="font-family:var(--font-display); color:var(--gold-dim); font-size:20px;">✦ ผลลัพธ์คำทำนายภาพรวมรายสัปดาห์ ✦</h3>
-        <p style="font-size:11px; color:var(--ink-muted); font-family:var(--font-mono);">การประสานพลังแห่งชะตา: ${cards[0].name}, ${cards[1].name} และ ${cards[2].name}</p>
-      </div>
-
-      <div class="result-readings">
-        <div class="result-reading-item">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>💰</span><strong>วิถีแห่งทรัพย์และการมั่งคั่ง</strong></div>
-          <div style="font-size:13.5px; line-height:1.7;">
-            สัปดาห์นี้กระแสการเงินของท่านขับเคลื่อนด้วยพลังของไพ่ทั้ง 3 ใบที่ปรากฏ มีเกณฑ์ที่ ${cards[0].finance} ซึ่งจะส่งผลต่อเนื่องให้ช่วงสัปดาห์เกิดสภาวะที่ ${cards[1].finance} และจะสรุปปิดท้ายอย่างมีนัยสำคัญคือ ${cards[2].finance} ขอให้ท่านบริหารจัดการทรัพย์ด้วยความรอบคอบค่ะ
-          </div>
-        </div>
-
-        <div class="result-reading-item">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>💼</span><strong>เส้นทางอาชีพและความสำเร็จ</strong></div>
-          <div style="font-size:13.5px; line-height:1.7;">
-            ในส่วนของการงานนั้น ชะตาชีวิตในอาชีพของท่านกำลังพบกับการเปลี่ยนแปลง ไพ่บ่งบอกว่า ${cards[0].work} ซึ่งส่งแรงกระเพื่อมต่อเนื่องทำให้ ${cards[1].work} และสุดท้ายเป้าหมายปลายสัปดาห์จะลงเอยที่ ${cards[2].work} ถือเป็นช่วงเวลาที่ต้องใช้ความพยายามสูงแต่ผลลัพธ์คุ้มค่าเหนื่อยแน่นอนค่ะ
-          </div>
-        </div>
-
-        <div class="result-reading-item">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>🌹</span><strong>ความสัมพันธ์และพันธนาการแห่งใจ</strong></div>
-          <div style="font-size:13.5px; line-height:1.7;">
-            เรื่องราวของหัวใจในอาทิตย์นี้มีมนต์ขลังและซับซ้อน พลังงานของไพ่ระบุชัดว่า ${cards[0].love} แต่อาจจะต้องระวังในช่วงที่ชะตาพลิกผันซึ่งจะทำให้ ${cards[1].love} ทว่าในบทสรุปสุดท้ายของความรู้สึกสัปดาห์นี้ ท่านจะพบความกระจ่างใสใจว่า ${cards[2].love} ขอให้เชื่อมั่นในสัญชาตญาณความรู้สึกรักของตัวเองนะคะ
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:20px; padding-top:12px; border-top: 1px dashed var(--border); text-align:center;">
-        <p style="font-size:12px; font-style:italic; color:var(--gold-dim);">"ขอสาส์นนำทางนี้เป็นแสงไฟส่องสว่างความสุขให้แก่ท่านตลอดทั้งสัปดาห์" — แม่หมอเห็ดฟาง</p>
-      </div>
-    </div>`;
-  document.getElementById('weeklyResult').style.display = 'block';
-}
-
-// ==========================================
-//  💬 Q&A MANAGEMENT SYSTEMS
-// ==========================================
-async function handleQaAsk() {
-  if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนค่ะ', 'error'); return; }
-  const q = document.getElementById('qaInput').value.trim();
-  if (!q) { showToast('กรุณาเขียนคำถามก่อนส่งฝากค่ะ', 'error'); return; }
-  if (state.tokens < 3) { showToast('ยอดแต้มคงเหลือไม่เพียงพอ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
-
-  const btn = document.getElementById('qaBtn'); btn.disabled = true;
-  btn.innerHTML = '<div class="spinner"></div> กำลังส่งสาส์น...';
-
-  const res = await callAPI({ action: "submitQA", email: state.user.email, question: q });
-  if (res && res.success) {
-    state.tokens = res.tokens; document.getElementById('qaInput').value = '';
-    showToast('✨ ส่งสาส์นคำถามสำเร็จ รอแม่หมอเห็ดฟางมาเขียนตอบดวงชะตาให้ด้านล่างค่ะ', 'success');
-    fetchQaUpdates();
-  }
-  btn.disabled = false; btn.innerHTML = '✨ ส่งคำถามฝากแม่หมอ';
-}
-
-async function fetchQaUpdates() {
-  if (!state.loggedIn) return;
-  const res = await callAPI({ action: "fetchQA", email: state.user.email });
-  if (res && res.success && res.history) {
-    document.getElementById('qaHistory').innerHTML = res.history.map(item => `
-      <div class="qa-item" style="animation: slide-up 0.4s ease;">
-        <div class="qa-q">
-          <span class="${item.status.toLowerCase() === 'pending' ? 'qa-status-pending' : 'qa-status-answered'}">
-            ${item.status.toLowerCase() === 'pending' ? '⏳ รอตรวจชะตา' : '✓ ตอบแล้ว'}
-          </span>
-          💬 คำถาม: ${item.q}
-        </div>
-        <div class="qa-a">🔮 แม่หมอเห็ดฟางบอกสาส์น: ${item.a}</div>
-      </div>
-    `).join('');
-  }
-}
-
-function initTopupMainContent() {
-  document.getElementById('topupModalContent').innerHTML = `
-    <button class="modal-close" onclick="closeModal('topupModal')">✕</button>
-    <div class="modal-title" style="font-family:var(--font-display); font-size:16px; font-weight:600; text-align:center;">🪙 บูชาเพิ่มแต้มสำหรับเปิดไพ่ชะตาชีวิต</div>
-    <div class="package-list">
-      <div class="package-item" onclick="buyPackage(5, 50)"><strong>🪙 5 แต้ม</strong> <span>฿50</span></div>
-      <div class="package-item" onclick="buyPackage(12, 100)"><strong>🪙 12 แต้ม</strong> <span>฿100</span></div>
-      <div class="package-item" onclick="buyPackage(24, 200)"><strong>🪙 24 แต้ม</strong> <span>฿200</span></div>
-    </div>
-  `;
-}
-
-function buyPackage(tokens, price) {
-  document.getElementById('topupModalContent').innerHTML = `
-    <button class="modal-close" onclick="initTopupMainContent()">✕</button>
-    <div class="modal-title" style="text-align:center; color:var(--gold); font-size:15px; font-weight:600; margin-bottom:4px;">🔮 ช่องทางการโอนบูชาเงินเพื่อรับแต้ม</div>
-    <div class="modal-sub" style="text-align:center; margin-bottom:12px; font-size:12px;">ท่านเลือกแพ็กเกจ: <strong>🪙 ${tokens} แต้ม</strong> ยอดสุทธิ: <strong>฿${price}</strong></div>
-    <div style="background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center; margin-bottom:12px;">
-      <p style="font-size:11px; opacity:0.8;">โอนเข้าบัญชี Mobile Banking</p>
-      <p style="font-size:13px; font-weight:600;">🏦 ธนาคารกสิกรไทย (KBank)</p>
-      <p style="font-size:16px; font-family:var(--font-mono); font-weight:600; color:var(--gold-dim); margin:2px 0;">179-8-46891-6</p>
-      <p style="font-size:11px; font-weight:500;">ชื่อบัญชี: ผกามาศ บรรทัดจันทร์</p>
-    </div>
-    <div style="text-align:center; margin-bottom:12px;">
-      <img src="https://i.ibb.co/d0pCLPGM/Screenshot-2026-05-20-082119.png" alt="QR" style="max-width:130px; border-radius:6px; border:1px solid var(--border);">
-    </div>
-    <button class="btn btn-dark" style="width:100%; padding:12px; font-size:13px; background:#06C755; color:white; border:none;" onclick="redirectToLineOA(${tokens}, ${price})">💬 ส่งรูปสลิปแจ้งแอดมินผ่านแอป LINE</button>
-  `;
-}
-
-function redirectToLineOA(tokens, price) {
-  const textMessage = encodeURIComponent(`🔮 แจ้งโอนเงินดูดวงค่ะ\n👤 อีเมลระบบ: ${state.user.email}\n🪙 แพ็กเกจที่เลือก: ${tokens} แต้ม\n💰 ยอดโอน: ${price} บาท\n(ท่านสามารถแนบรูปสลิปหลักฐานต่อท้ายข้อความนี้ได้เลยค่ะ)`);
-  window.open(`https://line.me/R/oaMessage/@626bkxzd/?${textMessage}`, '_blank');
-  closeModal('topupModal');
-}
-
-function openModal(id) { if(id === 'topupModal') { initTopupMainContent(); } document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-function showToast(msg, type = '') { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast ' + type; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
-
-function updateUI() {
-  const topbar = document.getElementById('topbarRight');
-  if (state.loggedIn) {
-    topbar.innerHTML = `
-      <span class="user-name">👤 ${state.user.name}</span>
-      <div class="token-badge" id="tokenBadge">🪙 ${state.tokens} แต้ม</div>
-      <button class="btn btn-ghost" onclick="openModal('topupModal')">+ เติมแต้ม</button>
-      <button class="btn btn-outline" onclick="doLogout()" style="padding:6px 12px; font-size:11px; border-color:transparent;">ออกจากระบบ</button>
-    `;
-    document.getElementById('checkinBanner').style.display = 'block';
-    document.getElementById('modeTabs').style.display = 'flex';
-    document.getElementById('questionSelector').style.display = 'block';
-    
-    const checkinBtn = document.getElementById('checkinBtn');
-    checkinBtn.textContent = state.checkedInToday ? '✓ รับแล้ว' : 'รับแต้มประจำวัน +1';
-    checkinBtn.disabled = state.checkedInToday;
-    checkTokenWarning();
-  } else {
-    showGuestTopbar();
-  }
-}
-
-function updateUIAndCheckinState() {
-  updateUI();
-}
-
-function updateTokenBadge() {
-  const badge = document.getElementById('tokenBadge');
-  if (badge) badge.textContent = `🪙 ${state.tokens} แต้ม`;
-  checkTokenWarning();
-}
-
-function checkTokenWarning() {
-  const btn = document.getElementById('openCardBtn');
-  if (btn) btn.disabled = (state.tokens === 0);
-}
-</script>
-</body>
-</html>
-
