@@ -705,17 +705,66 @@ function showDailyResult(card) {
     </div>`;
   document.getElementById('dailyResult').style.display = 'block';
 }
-
+// 🌙 ปรับปรุงระบบทำนายรายสัปดาห์: เน้นภาพรวม 3 ด้านหลัก (งาน, เงิน, รัก) แบบเจาะลึก
 function showWeeklyResult(combo) {
+  const cards = combo.cards;
+  
+  // สร้างเนื้อหาคำทำนายแบบยาวและลึกซึ้ง โดยดึงความหมายจากไพ่ทั้ง 3 ใบมาผสมผสานกัน
   document.getElementById('weeklyResult').innerHTML = `
-    <div class="result-box">
-      <div class="weekly-result-grid">
-        <div class="weekly-card-result"><span class="wc-label">ต้นสัปดาห์</span><span class="wc-text">${combo.early}</span></div>
-        <div class="weekly-card-result"><span class="wc-label">กลางสัปดาห์</span><span class="wc-text">${combo.mid}</span></div>
-        <div class="weekly-card-result"><span class="wc-label">ปลายสัปดาห์</span><span class="wc-text">${combo.late}</span></div>
+    <div class="result-box" style="animation: slide-up 0.8s ease;">
+      <div style="text-align:center; margin-bottom:25px; border-bottom: 1px solid var(--border); padding-bottom:15px;">
+        <h3 style="font-family:var(--font-display); color:var(--gold-dim); font-size:22px;">✦ คำทำนายภาพรวมรายสัปดาห์ ✦</h3>
+        <p style="font-size:12px; color:var(--ink-muted); font-family:var(--font-mono);">การประสานพลังของไพ่ ${cards[0].name}, ${cards[1].name} และ ${cards[2].name}</p>
+      </div>
+
+      <div class="result-readings">
+        <div class="result-reading-item" style="margin-bottom:15px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span style="font-size:24px;">💰</span>
+            <strong style="font-size:16px; color:var(--ink);">วิถีแห่งทรัพย์และการมั่งคั่ง</strong>
+          </div>
+          <div class="reading-item-text" style="font-size:14px; line-height:1.8;">
+            สัปดาห์นี้กระแสการเงินของท่านขับเคลื่อนด้วยพลังของไพ่ทั้ง 3 ใบที่ปรากฏ 
+            มีเกณฑ์ที่ ${cards[0].finance} ซึ่งจะส่งผลต่อเนื่องให้ช่วงกลางสัปดาห์เกิดสภาวะที่ ${cards[1].finance} 
+            และจะปิดท้ายสัปดาห์อย่างมีนัยสำคัญคือ ${cards[2].finance} 
+            ขอให้ท่านบริหารจัดการทรัพย์ด้วยความรอบคอบ พลังของไพ่บ่งบอกว่าโอกาสในการรับทรัพย์ใหญ่กำลังเปิดทางให้หากท่านมีสติในการใช้จ่าย
+          </div>
+        </div>
+
+        <div class="result-reading-item" style="margin-bottom:15px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span style="font-size:24px;">💼</span>
+            <strong style="font-size:16px; color:var(--ink);">เส้นทางอาชีพและความสำเร็จ</strong>
+          </div>
+          <div class="reading-item-text" style="font-size:14px; line-height:1.8;">
+            ในส่วนของการงานนั้น ชะตาชีวิตในอาชีพของท่านกำลังพบกับการเปลี่ยนแปลง 
+            ไพ่ใบแรกเตือนว่า ${cards[0].work} ซึ่งส่งแรงกระเพื่อมไปยังส่วนกลางของงานทำให้ ${cards[1].work} 
+            และสุดท้ายบทสรุปของเป้าหมายในสัปดาห์นี้จะลงเอยที่ ${cards[2].work} 
+            ถือเป็นสัปดาห์ที่ต้องใช้ความพยายามสูงแต่ผลลัพธ์จะคุ้มค่ากับแรงกายแรงใจที่ท่านทุ่มเทลงไปอย่างแน่นอน
+          </div>
+        </div>
+
+        <div class="result-reading-item">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span style="font-size:24px;">🌹</span>
+            <strong style="font-size:16px; color:var(--ink);">ความสัมพันธ์และพันธนาการแห่งใจ</strong>
+          </div>
+          <div class="reading-item-text" style="font-size:14px; line-height:1.8;">
+            เรื่องราวของหัวใจในอาทิตย์นี้มีมนต์ขลังและซับซ้อน 
+            พลังงานของไพ่ระบุว่า ${cards[0].love} แต่อาจจะต้องระวังในช่วงที่ชะตาพลิกผันซึ่งจะทำให้ ${cards[1].love} 
+            ทว่าในตอนจบของความรู้สึกอาทิตย์นี้ ท่านจะพบความกระจ่างว่า ${cards[2].love} 
+            ขอให้เชื่อมั่นในสัญชาตญาณรักของท่าน ไพ่แนะนำให้เปิดใจคุยกันเพื่อสร้างความเข้าใจที่ลึกซึ้งยิ่งขึ้นกว่าเดิม
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:25px; padding-top:15px; border-top: 1px dashed var(--border); text-align:center;">
+        <p style="font-size:13px; font-style:italic; color:var(--gold-dim);">"ขอให้คำทำนายนี้เป็นแสงสว่างนำทางชีวิตในสัปดาห์อันประเสริฐของท่าน" — แม่หมอผกามาศ</p>
       </div>
     </div>`;
   document.getElementById('weeklyResult').style.display = 'block';
+}
+
 }
 
 function openModal(id) { 
