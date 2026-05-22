@@ -591,23 +591,11 @@ window.addEventListener('DOMContentLoaded', () => {
   checkSavedLogin();
 });
 
-
-// =====================================
-// 🔮 CORE CONNECTIVITY (เวอร์ชันแก้บั๊กล็อกอินเข้าไม่ได้ - ปรับส่งแบบ Form Data)
-// =====================================
 async function callAPI(payload) {
   try {
-    // เปลี่ยนมาใช้ FormData เพื่อให้ Google Apps Script (e.parameter) อ่านค่าล็อกอินและถอนแต้มได้ 100%
-    const formData = new FormData();
-    for (const key in payload) {
-      formData.append(key, payload[key]);
-    }
-
-    // ส่งข้อมูลแบบ POST พร้อมแนบฟอร์มไปหาหลังบ้านตรง ๆ
-    const response = await fetch(BACKEND_API_URL, {
-      method: "POST",
-      body: formData
-    });
+    const params = new URLSearchParams();
+    for (const key in payload) { params.append(key, payload[key]); }
+    const response = await fetch(`${BACKEND_API_URL}?${params.toString()}`, { method: "POST" });
     return await response.json();
   } catch (error) {
     console.error("API Error:", error);
