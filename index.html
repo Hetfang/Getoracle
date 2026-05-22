@@ -2,9 +2,10 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Get Oracle ✦ ดูดวงไพ่ออราเคิลแม่หมอเห็ดฟาง</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Thai:wght@300;400;500;600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
   --cream: #F7F3EE;
@@ -29,188 +30,171 @@
   --font-mono: 'Space Mono', monospace;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--cream); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--ink); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; }
 
 body::before {
   content: ''; position: fixed; inset: 0;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(201,169,110,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(107,127,196,0.06) 0%, transparent 60%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(201,169,110,0.08) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(107,127,196,0.06) 0%, transparent 60%), url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
   pointer-events: none; z-index: 0;
 }
 
-/* ===== TOP BAR ===== */
-.topbar { position: sticky; top: 0; z-index: 100; background: rgba(247,243,238,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; }
-.topbar-logo { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
+/* ===== UI เน้นมือถือ (Mobile Browser Optimization) ===== */
+.main-container { width: 100%; max-width: 480px; padding: 15px; display: flex; flex-direction: column; align-items: center; flex-grow: 1; z-index: 1; }
+.topbar { width: 100%; max-width: 480px; background: rgba(247,243,238,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; sticky: top; z-index: 100; }
+.topbar-logo { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--ink); }
 .topbar-logo span { color: var(--gold); }
-.topbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
 .token-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: var(--gold-light); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 500; font-family: var(--font-mono); }
-.user-name { font-size: 13px; color: var(--ink-muted); font-weight: 500; }
+.user-name { font-size: 12px; color: var(--ink-muted); font-weight: 500; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* BUTTONS */
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s ease; white-space: nowrap; }
-.btn:active { transform: scale(0.97); }
-.btn-gold { background: var(--gold); color: var(--ink); }
-.btn-gold:hover { background: var(--gold-dim); color: #fff; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; border: none; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s ease; }
+.btn-gold { background: var(--gold); color: var(--ink); font-weight: bold; }
 .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold-dim); }
-.btn-dark { background: var(--ink); color: var(--cream); }
-.btn-dark:hover { background: var(--ink-soft); }
-.btn-ghost { background: rgba(201,169,110,0.12); color: var(--gold-dim); border: 1px solid rgba(201,169,110,0.3); }
+.btn-dark { background: var(--ink); color: var(--cream); width: 100%; justify-content: center; padding: 12px; border-radius: var(--radius-sm); font-weight: bold; }
+.btn-ghost { background: rgba(201,169,110,0.12); color: var(--gold-dim); padding: 6px 12px; font-size: 11px; border-radius: 20px; }
 
-/* ===== HERO ===== */
-.hero { position: relative; z-index: 1; text-align: center; padding: 40px 24px 20px; }
-.hero-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
-.hero-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 54px); font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+/* ===== HERO & LOBBY DESIGN (ไม่โล่งตา มีมิติพรีเมียม) ===== */
+.hero { text-align: center; padding: 20px 10px 10px; }
+.hero-title { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
 .hero-title em { font-style: italic; color: var(--gold-dim); }
-.hero-sub { font-size: 14px; color: var(--ink-muted); max-width: 480px; margin: 0 auto 20px; line-height: 1.6; }
+.hero-sub { font-size: 13px; color: var(--ink-muted); line-height: 1.5; padding: 0 10px; }
 
-/* ===== CHECKIN BANNER ===== */
-.checkin-banner { max-width: 680px; margin: 0 auto 24px; padding: 0 16px; }
-.checkin-card { background: linear-gradient(135deg, var(--ink) 0%, #2A2420 100%); border-radius: var(--radius); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid rgba(201,169,110,0.2); box-shadow: var(--shadow-card); }
-.checkin-info { color: var(--cream); }
-.checkin-info strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; color: var(--gold-light); }
+/* แบนเนอร์กองไพ่ศักดิ์สิทธิ์ลอยเด่นกลางหน้าแรก */
+.deck-center-wrapper { position: relative; width: 160px; height: 240px; margin: 25px 0; display: flex; justify-content: center; align-items: center; }
+.deck-glow-circle { position: absolute; width: 200px; height: 200px; background: radial-gradient(circle, rgba(201,169,110,0.2) 0%, transparent 70%); animation: pulse-glow 3s ease-in-out infinite; }
+.mystic-stacked-deck { position: relative; width: 130px; height: 200px; background: linear-gradient(135deg, #1A1612 0%, #2C2419 100%); border: 2px solid var(--gold); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; }
+.mystic-stacked-deck::before { content: ''; position: absolute; top: 4px; left: 4px; width: 100%; height: 100%; background: #221a14; border: 1px solid rgba(201,169,110,0.4); border-radius: 12px; z-index: -1; }
+.mystic-stacked-deck::after { content: ''; position: absolute; top: 8px; left: 8px; width: 100%; height: 100%; background: #15100c; border: 1px solid rgba(201,169,110,0.2); border-radius: 12px; z-index: -2; }
+.inner-pattern-deck { width: 90%; height: 92%; border: 1px dashed rgba(201,169,110,0.3); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--gold); gap: 6px; }
+.inner-pattern-deck i { font-size: 28px; }
+.deck-badge { background: var(--gold); color: #1A1612; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 20px; margin-top: 4px; }
+
+/* แถบสถิติเพิ่มความเต็มอิ่มความน่าเชื่อถือ */
+.lobby-stat-bar { display: grid; grid-template-columns: 1fr 1fr; width: 100%; background: rgba(255,255,255,0.4); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 20px; text-align: center; }
+.stat-box:first-child { border-right: 1px solid var(--border); }
+.stat-num { font-size: 16px; font-weight: bold; color: var(--gold-dim); }
+.stat-lbl { font-size: 11px; color: var(--ink-muted); }
+
+/* ===== CHECKIN & TABS ===== */
+.checkin-banner { width: 100%; margin-bottom: 16px; display: none; }
+.checkin-card { background: linear-gradient(135deg, var(--ink) 0%, #2A2420 100%); border-radius: var(--radius); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid rgba(201,169,110,0.2); width: 100%; }
+.checkin-info strong { display: block; font-size: 13px; color: var(--gold-light); }
 .checkin-info span { font-size: 11px; color: rgba(247,243,238,0.5); }
 
-/* ===== SECTION TABS ===== */
-.section-tabs { max-width: 680px; margin: 0 auto 24px; padding: 0 16px; display: none; gap: 8px; }
-.tab-btn { flex: 1; min-width: 0; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 8px; cursor: pointer; text-align: center; transition: all 0.2s; font-family: var(--font-body); }
-.tab-btn.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
-.tab-btn .tab-icon { font-size: 20px; display: block; margin-bottom: 2px; }
-.tab-btn .tab-label { font-size: 11px; font-weight: 600; display: block; white-space: nowrap; }
-.tab-btn .tab-cost { font-size: 9px; opacity: 0.6; display: block; font-family: var(--font-mono); }
+.section-tabs { width: 100%; display: none; gap: 6px; margin-bottom: 16px; }
+.tab-btn { flex: 1; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 4px; cursor: pointer; text-align: center; }
+.tab-btn.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.tab-btn .tab-icon { font-size: 18px; display: block; }
+.tab-btn .tab-label { font-size: 10px; font-weight: 600; display: block; }
+.tab-btn .tab-cost { font-size: 8px; opacity: 0.6; display: block; font-family: var(--font-mono); }
 
-/* ===== ZONE WRAPPERS (ป้องกันการซ้อนทับกันบนสมาร์ทโฟน 100%) ===== */
+/* ===== ZONE MANAGEMENT ===== */
 .mode-container { display: none; width: 100%; }
 .mode-container.active-mode { display: block; }
-.reading-zone { max-width: 680px; margin: 0 auto; padding: 0 16px 60px; position: relative; }
 
-/* QUESTION SELECTOR */
-.question-selector { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow); }
-.qs-title { font-size: 12px; font-weight: 600; color: var(--ink-muted); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
-.qs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.qs-btn { background: var(--cream); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 4px; cursor: pointer; text-align: center; transition: all 0.2s; font-family: var(--font-body); }
+.question-selector { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin-bottom: 16px; width: 100%; display: none; }
+.qs-title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; margin-bottom: 10px; }
+.qs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.qs-btn { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 2px; cursor: pointer; text-align: center; }
 .qs-btn.selected { border-color: var(--gold); background: rgba(201,169,110,0.12); color: var(--gold-dim); }
-.qs-btn .qs-icon { font-size: 20px; display: block; margin-bottom: 4px; }
-.qs-btn .qs-label { font-size: 12px; font-weight: 600; display: block; }
+.qs-btn .qs-icon { font-size: 18px; display: block; }
+.qs-btn .qs-label { font-size: 11px; font-weight: 600; display: block; }
 
-/* ===== INTERACTIVE SELECTION PLACE ===== */
-.deck-wrapper { text-align: center; background: rgba(26,22,18,0.03); padding: 24px 12px; border-radius: var(--radius); border: 1px dashed var(--border); margin-bottom: 24px; }
-.deck-title { font-size: 14px; font-weight: 600; color: var(--gold-dim); margin-bottom: 16px; }
-.interactive-deck { display: flex; justify-content: center; gap: -20px; flex-wrap: wrap; max-width: 500px; margin: 0 auto; padding: 10px 0; }
-
-/* CARD ARCHITECTURE & ANIMATION EFFECTS */
-.tarot-card { width: 95px; height: 155px; position: relative; cursor: pointer; perspective: 1000px; transition: all 0.3s ease; margin: 0 -15px 15px -15px; }
-.tarot-card:hover { transform: translateY(-15px) rotate(-3deg); z-index: 50 !important; }
-.tarot-card.selected-by-user { transform: translateY(-25px) scale(1.05); filter: drop-shadow(0 10px 20px rgba(201,169,110,0.4)); z-index: 40 !important; pointer-events: none; }
+/* โซนสุ่มเลือกไพ่จากกอง 48 ใบขนาดใหญ่จุใจ */
+.cards-scroll-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; max-height: 340px; overflow-y: auto; background: rgba(0,0,0,0.03); border-radius: 12px; padding: 8px; border: 1px dashed var(--border); }
+.tarot-card { aspect-ratio: 2/3; position: relative; cursor: pointer; perspective: 1000px; width: 100%; }
+.tarot-card.selected-by-user { transform: translateY(-5px); filter: drop-shadow(0 4px 10px rgba(201,169,110,0.4)); pointer-events: none; }
 .tarot-card.reveal-animation .card-inner { transform: rotateY(180deg); }
-
-.card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-.card-face, .card-back { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.card-back { background: linear-gradient(145deg, #1A1612 0%, #2C2419 50%, #1A1612 100%); display: flex; align-items: center; justify-content: center; border: 1px solid var(--gold); }
-.card-back-pattern { width: 88%; height: 88%; border: 1px solid rgba(201,169,110,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-.card-back-pattern::before { content: '✦'; font-size: 24px; color: rgba(201,169,110,0.3); }
-
-.card-face { transform: rotateY(180deg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; text-align: center; background: var(--card-bg); border: 2px solid var(--gold-light); }
-.card-face-glyph { font-size: 28px; margin-bottom: 4px; }
-.card-face-name { font-family: var(--font-display); font-size: 11px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-.card-face-sub { font-size: 8px; color: var(--gold-dim); font-family: var(--font-mono); text-transform: uppercase; }
+.card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2); }
+.card-face, .card-back { position: absolute; inset: 0; border-radius: 6px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.card-back { background: linear-gradient(145deg, #1A1612 0%, #2C2419 100%); border: 1px solid var(--gold); color: rgba(201,169,110,0.4); font-size: 11px; flex-direction: column; }
+.card-face { transform: rotateY(180deg); flex-direction: column; background: var(--card-bg); border: 1.5px solid var(--gold-light); text-align: center; padding: 2px; }
+.card-face-glyph { font-size: 18px; }
+.card-face-name { font-size: 8px; font-weight: bold; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
 
 /* ===== RESULT MODULE ===== */
-.result-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; box-shadow: var(--shadow); margin-top: 24px; width: 100%; }
-.result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-.result-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 22px; }
-.result-card-name { flex: 1; }
-.result-card-name strong { font-family: var(--font-display); font-size: 18px; display: block; }
-.result-card-name span { font-size: 10px; color: var(--gold); font-family: var(--font-mono); text-transform: uppercase; }
-.result-category-badge { font-size: 10px; padding: 4px 10px; border-radius: 999px; font-weight: 500; }
-.badge-finance { background: rgba(139,168,136,0.15); color: var(--sage); }
-.badge-work { background: rgba(107,127,196,0.15); color: var(--indigo); }
-.badge-love { background: rgba(196,132,122,0.15); color: var(--rose); }
-.badge-luck { background: rgba(201,169,110,0.15); color: var(--gold-dim); }
-.result-reading-item { background: var(--cream); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
+.result-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; box-shadow: var(--shadow); margin-top: 16px; width: 100%; }
+.result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.result-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; }
+.result-card-name strong { font-size: 15px; display: block; }
+.result-card-name span { font-size: 9px; color: var(--gold); font-family: var(--font-mono); }
+.result-category-badge { font-size: 9px; padding: 2px 8px; border-radius: 999px; font-weight: 500; margin-left: auto; }
+.result-reading-item { background: var(--cream); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 10px; font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
 
-/* ADVICE LOCK SYSTEM (+1 TOKEN) */
-.advice-lock-zone { margin-top: 16px; background: rgba(201,169,110,0.06); border: 1px dashed var(--gold); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
-.advice-btn { background: var(--ink); color: var(--gold-light); border: none; padding: 10px 20px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
-.advice-btn:hover { background: var(--ink-soft); }
+.advice-lock-zone { margin-top: 12px; background: rgba(201,169,110,0.05); border: 1px dashed var(--gold); border-radius: var(--radius-sm); padding: 12px; text-align: center; }
+.advice-btn { background: var(--ink); color: var(--gold-light); border: none; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; width: 100%; }
 
 /* ===== Q&A MODE ===== */
-.qa-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); width: 100%; }
-.qa-title { font-family: var(--font-display); font-size: 17px; margin-bottom: 4px; }
-.qa-subtitle { font-size: 11px; color: var(--ink-muted); margin-bottom: 14px; font-family: var(--font-mono); }
-.qa-input { width: 100%; padding: 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; background: var(--cream); resize: vertical; min-height: 80px; margin-bottom: 12px; }
-.qa-history { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
-.qa-item { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
-.qa-q { background: var(--ink); color: var(--cream); padding: 10px; font-size: 12.5px; }
-.qa-a { background: var(--cream); padding: 10px; font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); }
+.qa-box { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; box-shadow: var(--shadow); width: 100%; }
+.qa-title { font-size: 15px; font-weight: bold; }
+.qa-subtitle { font-size: 11px; color: var(--ink-muted); margin-bottom: 10px; }
+.qa-input { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; background: var(--cream); resize: none; min-height: 70px; margin-bottom: 10px; }
+.btn-read { width: 100%; background: var(--ink); color: var(--cream); border: none; padding: 12px; border-radius: var(--radius-sm); font-size: 13px; font-weight: bold; cursor: pointer; }
+.qa-history { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
 
-/* ===== MODAL & TOAST ===== */
-.modal-overlay { position: fixed; inset: 0; background: rgba(26,22,18,0.6); backdrop-filter: blur(6px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+/* ===== MODALS ===== */
+.modal-overlay { position: fixed; inset: 0; background: rgba(26,22,18,0.6); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal { background: var(--warm-white); border-radius: var(--radius); padding: 24px; max-width: 400px; width: 100%; position: relative; }
-.modal-close { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--cream); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.package-list { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
-.package-item { border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-.package-item:hover { border-color: var(--gold); background: rgba(201,169,110,0.05); }
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--ink); color: var(--cream); padding: 10px 20px; border-radius: 999px; font-size: 12.5px; z-index: 999; transition: transform 0.3s; }
-.toast.show { transform: translateX(-50%) translateY(0); }
-.spinner { width: 14px; height: 14px; border: 2px solid rgba(247,243,238,0.3); border-top-color: var(--cream); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; margin-right: 6px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes slide-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.modal { background: var(--warm-white); border-radius: var(--radius); padding: 20px; max-width: 360px; width: 100%; position: relative; }
+.modal-close { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; border: none; background: var(--cream); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.package-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.package-item { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 12px; background: #fff; }
+
+@keyframes pulse-glow { 0% { transform: scale(0.96); opacity: 0.4; } 50% { transform: scale(1.04); opacity: 0.8; } 100% { transform: scale(0.96); opacity: 0.4; } }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-logo">✦ <span>Get</span> Oracle</div>
-  <div class="topbar-right" id="topbarRight">
-    <div id="authLoading" style="font-size:12px; color:var(--ink-muted);"><div class="spinner"></div> กำลังดึงประวัติตำราดวง...</div>
+  <div class="topbar-right" id="topbarRight"></div>
+</div>
+
+<div class="main-container">
+  
+  <div class="hero">
+    <div class="hero-title">สำนักไพ่<em>แม่หมอเห็ดฟาง</em></div>
+    <div class="hero-sub">สื่อจิตพิสูจน์ชะตากรรมข้ามขอบฟ้า ขยายพลังสูงสุดด้วยกองไพ่พรีเมียมขนาดยักษ์ 48 ใบ</div>
   </div>
-</div>
 
-<div class="hero">
-  <div class="hero-eyebrow">✦ Oracle Reading ✦</div>
-  <h1 class="hero-title">ดวงชะตาบอก<em>อะไร</em>?</h1>
-  <p class="hero-sub">ตั้งจิตอธิษฐานแล้วเลือกไพ่ด้วยตัวเอง สื่อจิตถึงแม่หมอเห็ดฟาง ✦</p>
-</div>
-
-<div class="checkin-banner" id="checkinBanner" style="display:none">
-  <div class="checkin-card">
-    <div class="checkin-info">
-      <strong>☀️ รับพรประจำวันเพื่อสะสมแต้ม</strong>
-      <span>คลิกรับสิทธิ์ฟรีได้วันละ 1 ครั้งเท่านั้น</span>
+  <div id="lobby-view" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+    <div class="deck-center-wrapper">
+      <div class="deck-glow-circle"></div>
+      <div class="mystic-stacked-deck" onclick="startAppWithAuthCheck()">
+        <div class="inner-pattern-deck">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span class="deck-badge">48 CARDS DECK</span>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-gold" id="checkinBtn" onclick="doCheckin()">รับแต้มประจำวัน +1</button>
+    <div class="lobby-stat-bar">
+      <div class="stat-box"><div class="stat-num">48 ใบถ้วน</div><div class="stat-lbl">คำทำนาย Custom ลึกซึ้ง</div></div>
+      <div class="stat-box"><div class="stat-num">99.8%</div><div class="stat-lbl">ลูกดวงพึงพอใจกลับมาซ้ำ</div></div>
+    </div>
+    <button class="btn btn-gold" style="width:90%; padding:14px; justify-content:center; font-size:15px; box-shadow:0 4px 12px var(--gold-glow);" onclick="startAppWithAuthCheck()">
+      <i class="fa-solid fa-star"></i> เริ่มต้นเปิดไพ่ส่องชะตาชีวิต
+    </button>
   </div>
-</div>
 
-<div class="section-tabs" id="modeTabs">
-  <button class="tab-btn active" id="tab-daily" onclick="setMode('daily')">
-    <span class="tab-icon">🔮</span>
-    <span class="tab-label">ทำนายรายวัน</span>
-    <span class="tab-cost">ใช้ 1 แต้ม</span>
-  </button>
-  <button class="tab-btn" id="tab-weekly" onclick="setMode('weekly')">
-    <span class="tab-icon">🌙</span>
-    <span class="tab-label">ทำนายรายสัปดาห์</span>
-    <span class="tab-cost">ใช้ 3 แต้ม</span>
-  </button>
-  <button class="tab-btn" id="tab-qa" onclick="setMode('qa')">
-    <span class="tab-icon">💬</span>
-    <span class="tab-label">ถาม-ตอบแม่หมอ</span>
-    <span class="tab-cost">ใช้ 3 แต้ม</span>
-  </button>
-</div>
+  <div class="checkin-banner" id="checkinBanner">
+    <div class="checkin-card">
+      <div class="checkin-info"><strong>☀️ รับพรสะสมแต้มประจำวัน</strong><span>กดรับสิทธิ์ส่องดวงฟรีได้วันละ 1 ครั้ง</span></div>
+      <button class="btn btn-gold" id="checkinBtn" onclick="doCheckin()" style="padding:6px 12px; font-size:12px;">รับแต้ม +1</button>
+    </div>
+  </div>
 
-<div class="reading-zone">
-  <div id="modeDaily" class="mode-container active-mode">
-    <div class="question-selector" id="questionSelector" style="display:none">
-      <div class="qs-title">✦ ขั้นตอนที่ 1: เลือกหมวดหมู่เรื่องที่ต้องการถามชะตา</div>
+  <div class="section-tabs" id="modeTabs">
+    <button class="tab-btn active" id="tab-daily" onclick="setMode('daily')"><span class="tab-icon">🔮</span><span class="tab-label">ทำนายรายวัน</span><span class="tab-cost">ใช้ 1 แต้ม</span></button>
+    <button class="tab-btn" id="tab-weekly" onclick="setMode('weekly')"><span class="tab-icon">🌙</span><span class="tab-label">ทำนายรายสัปดาห์</span><span class="tab-cost">ใช้ 3 แต้ม</span></button>
+    <button class="tab-btn" id="tab-qa" onclick="setMode('qa')"><span class="tab-icon">💬</span><span class="tab-label">ถามแม่หมอ</span><span class="tab-cost">ใช้ 3 แต้ม</span></button>
+  </div>
+
+  <div id="modeDaily" class="mode-container">
+    <div class="question-selector" id="questionSelector">
+      <div class="qs-title">✦ ขั้นตอนที่ 1: เลือกหมวดหมู่ที่ต้องการถามครู</div>
       <div class="qs-grid">
         <button class="qs-btn" id="qs-finance" onclick="selectCategory('finance')"><span class="qs-icon">💰</span><span class="qs-label">การเงิน</span></button>
         <button class="qs-btn" id="qs-work" onclick="selectCategory('work')"><span class="qs-icon">💼</span><span class="qs-label">การงาน</span></button>
@@ -218,73 +202,51 @@ body::before {
         <button class="qs-btn" id="qs-luck" onclick="selectCategory('luck')"><span class="qs-icon">⭐</span><span class="qs-label">โชคลาภ</span></button>
       </div>
     </div>
-
-    <div id="dailyInteractiveDeckZone" class="deck-wrapper" style="display:none;">
-      <div class="deck-title">✦ ขั้นตอนที่ 2: ตั้งสมาธิจิ้มเลือกไพ่ที่ดึงดูดท่านมากที่สุด 1 ใบ</div>
-      <div class="interactive-deck" id="dailySelectDeck"></div>
+    <div id="dailyInteractiveDeckZone" class="deck-wrapper" style="display:none; background:rgba(0,0,0,0.02); padding:12px; border-radius:14px; border:1px dashed var(--border);">
+      <div class="deck-title" style="font-size:12px; color:var(--gold-dim); margin-bottom:10px;">✦ ขั้นตอนที่ 2: ตั้งสมาธิจิ้มเลือกไพ่ที่ดึงดูดท่านที่สุด 1 ใบ</div>
+      <div class="cards-scroll-grid" id="dailySelectDeck"></div>
     </div>
-
     <div id="dailyResult" style="display:none"></div>
   </div>
 
   <div id="modeWeekly" class="mode-container">
-    <div id="weeklyInteractiveDeckZone" class="deck-wrapper" style="display:none;">
-      <div class="deck-title" id="weeklyDeckTitle">✦ ตั้งสมาธิจิ้มเลือกไพ่ 3 ใบ เพื่อประกอบคำทำนายภาพรวม</div>
-      <div class="interactive-deck" id="weeklySelectDeck"></div>
+    <div id="weeklyInteractiveDeckZone" class="deck-wrapper" style="display:none; background:rgba(0,0,0,0.02); padding:12px; border-radius:14px; border:1px dashed var(--border);">
+      <div class="deck-title" id="weeklyDeckTitle" style="font-size:12px; color:var(--gold-dim); margin-bottom:10px;">✦ ตั้งสมาธิจิ้มเลือกไพ่หน้าคว่ำให้ครบ 3 ใบ</div>
+      <div class="cards-scroll-grid" id="weeklySelectDeck"></div>
     </div>
     <div id="weeklyResult" style="display:none"></div>
   </div>
 
   <div id="modeQa" class="mode-container">
     <div class="qa-box">
-      <div class="qa-title">💬 ส่งคำถามฝากดวงถึงแม่หมอเห็ดฟาง</div>
-      <div class="qa-subtitle">พิมพ์คำถามให้ชัดเจน ละเอียด คัดกรองผ่านจิต · ใช้ 3 แต้ม</div>
-      <textarea class="qa-input" id="qaInput" placeholder="พิมพ์คำถามตรงนี้... แม่หมอจะมาตอบสาส์นลับให้ด้านล่างค่ะ"></textarea>
-      <button class="btn-read" id="qaBtn" onclick="handleQaAsk()" style="max-width:100%">✨ ส่งคำถามฝากแม่หมอ</button>
+      <div class="qa-title">💬 ฝากคำถามชะตาชีวิตถึงแม่หมอเห็ดฟาง</div>
+      <div class="qa-subtitle">พิมพ์คำถามให้ละเอียด ชัดเจน คัดกรองผ่านจิต · ใช้ 3 แต้ม</div>
+      <textarea class="qa-input" id="qaInput" placeholder="ระบุเรื่องราวและคำถามของท่านตรงนี้... แม่หมอจะมาเขียนคำตอบสาส์นลับให้ด้านล่างค่ะ"></textarea>
+      <button class="btn-read" id="qaBtn" onclick="handleQaAsk()">✨ ส่งคำถามฝากแม่หมอ</button>
       <div class="qa-history" id="qaHistory"></div>
     </div>
   </div>
+
 </div>
 
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
-    <div class="modal-title" style="font-family:var(--font-display); font-size:18px; font-weight:600; text-align:center; margin-bottom:4px;">ยินดีต้อนรับสู่ Get Oracle</div>
-    <div class="modal-sub" style="text-align:center; margin-bottom:16px; font-size:12px; color:var(--ink-muted);">ระบุอีเมลและเบอร์โทรเพื่อล็อกอินหรือบันทึกข้อมูลแต้มของท่าน</div>
-     
-    <div style="margin-bottom:10px;">
-      <input type="email" id="loginEmail" placeholder="ระบุอีเมลของท่าน (เช่น name@gmail.com)" style="width:100%; padding:11px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--cream); font-size:13px;">
-    </div>
-    <div style="margin-bottom:16px;">
-      <input type="tel" id="loginPhone" placeholder="ระบุเบอร์โทรศัพท์ (เช่น 08XXXXXXXX)" style="width:100%; padding:11px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--cream); font-size:13px;">
-    </div>
-     
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <button class="btn btn-dark" style="width:100%; padding:12px; font-size:13px; justify-content:center;" id="loginBtnReal" onclick="doLogin()">🔓 เข้าสู่ระบบสมาชิก</button>
-      <button class="btn btn-gold" style="width:100%; padding:12px; font-size:13px; justify-content:center;" id="regBtnReal" onclick="doRegister()">✨ สมัครใหม่ (รับฟรี 3 แต้ม)</button>
+    <div style="font-family:var(--font-display); font-size:18px; font-weight:600; text-align:center; margin-bottom:4px;">ยินดีต้อนรับสู่ Get Oracle</div>
+    <div style="text-align:center; margin-bottom:14px; font-size:11px; color:var(--ink-muted);">กรุณาระบุข้อมูลเพื่อเชื่อมโยงกระเป๋าเหรียญแต้มดวงชะตาของท่าน</div>
+    <div style="margin-bottom:8px;"><input type="email" id="loginEmail" placeholder="ระบุอีเมลของท่าน" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--cream); font-size:13px;"></div>
+    <div style="margin-bottom:14px;"><input type="tel" id="loginPhone" placeholder="ระบุเบอร์โทรศัพท์ (ห้ามสมัครซ้ำ)" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--cream); font-size:13px;"></div>
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <button class="btn btn-dark" id="loginBtnReal" onclick="doLogin()">🔓 เข้าสู่ระบบสมาชิก</button>
+      <button class="btn btn-gold" id="regBtnReal" onclick="doRegister()" style="justify-content:center; padding:12px; border-radius:var(--radius-sm);">✨ สมัครสมาชิกใหม่ (รับฟรี 3 แต้ม)</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="topupModal">
-  <div class="modal" id="topupModalContent"></div>
-</div>
-
+<div class="modal-overlay" id="topupModal"><div class="modal" id="topupModalContent"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbybH7Qy4qWTv_yE1cg_BSJ9kmfPf9RzOE09Gx3En-FvQ0kxK-9V4QVC_8OVWsd0XetyhQ/exec"; 
-
-const state = {
-  loggedIn: false,
-  user: { name: '', email: '', phone: '' },
-  tokens: 0,
-  checkedInToday: false,
-  currentMode: 'daily',
-  selectedCategory: null,
-  weeklySelectedIndices: [],
-  currentDailyCard: null
-};
 
 // ==========================================
 //  🔮 ฐานข้อมูลคำทำนายไพ่ออราเคิลพรีเมียม 48 ใบเด็ดขาด
@@ -580,16 +542,7 @@ const CARDS = [
     advice: 'คุณได้ก้าวผ่านอุปสรรคขวากหนามทั้งหมดและวิ่งเข้าสู่เส้นชัยสำเร็จอย่างสง่างามแล้วค่ะในวันนี้ ถอนหายใจยาวๆ ชื่นชมกับความสำเร็จและให้รางวัลตัวเองให้เต็มที่ จบดีลงานใหญ่อย่างงดงามแล้วพักผ่อนกายใจให้ชื่นฉ่ำเพื่อเตรียมพร้อมรับทรัพย์ต่อยาวๆ ค่ะ' }
 ];
 
-const WEEKLY_COMBOS = [
-  { cards: [CARDS[0], CARDS[1], CARDS[2]] }
-];
-
-// ==========================================
-//  🔓 CORE CONNECTIVITY (e.parameter URL ระบบ)
-// ==========================================
-window.addEventListener('DOMContentLoaded', () => {
-  checkSavedLogin();
-});
+const WEEKLY_COMBOS = [{ cards: [CARDS[0], CARDS[1], CARDS[2]] } ];
 
 async function callAPI(payload) {
   try {
@@ -623,13 +576,30 @@ function showGuestTopbar() {
   `;
 }
 
+// ทางเข้าหลักของแอป: หากยังไม่เข้าสู่ระบบ จะเด้งหน้าล็อกอินทันทีเมื่อกดปุ่มหน้าแรก
+function startAppWithAuthCheck() {
+  if (!state.loggedIn) {
+    openModal('loginModal');
+  } else {
+    document.getElementById('lobby-view').style.display = 'none';
+    document.getElementById('modeTabs').style.display = 'flex';
+    document.getElementById('checkinBanner').style.display = 'block';
+    setMode('daily');
+  }
+}
+
 async function autoLogin(email, phone) {
   const res = await callAPI({ action: "login", email, phone });
   if (res && res.success) {
     state.loggedIn = true; state.tokens = res.tokens;
     state.user = { name: email.split('@')[0], email, phone };
     state.checkedInToday = res.checkedIn;
-    updateUI(); fetchQaUpdates();
+    updateUI(); 
+    document.getElementById('lobby-view').style.display = 'none';
+    document.getElementById('modeTabs').style.display = 'flex';
+    document.getElementById('checkinBanner').style.display = 'block';
+    setMode('daily');
+    fetchQaUpdates();
   } else {
     localStorage.removeItem('oracle_email');
     localStorage.removeItem('oracle_phone');
@@ -654,10 +624,14 @@ async function doRegister() {
     state.user = { name: email.split('@')[0], email, phone };
     state.checkedInToday = false; 
     closeModal('loginModal'); updateUI();
+    document.getElementById('lobby-view').style.display = 'none';
+    document.getElementById('modeTabs').style.display = 'flex';
+    document.getElementById('checkinBanner').style.display = 'block';
+    setMode('daily');
     showToast('🎉 สมัครสำเร็จ รับของขวัญแรกเข้าฟรี 3 แต้มค่ะ!', 'success');
   } else {
     showToast('⚠️ ' + (res ? res.message : 'เชื่อมต่อล้มเหลว'), 'error');
-    b1.disabled = false; b2.disabled = false; b2.innerHTML = '✨ สมัครใหม่';
+    b1.disabled = false; b2.disabled = false; b2.innerHTML = '🔓 เข้าสู่ระบบสมาชิก';
   }
 }
 
@@ -678,9 +652,13 @@ async function doLogin() {
     state.user = { name: email.split('@')[0], email, phone };
     state.checkedInToday = res.checkedIn;
     closeModal('loginModal'); updateUI(); fetchQaUpdates();
+    document.getElementById('lobby-view').style.display = 'none';
+    document.getElementById('modeTabs').style.display = 'flex';
+    document.getElementById('checkinBanner').style.display = 'block';
+    setMode('daily');
     showToast('🔓 เข้าสู่ระบบเรียบร้อย ยินดีต้อนรับกลับค่ะ', 'success');
   } else {
-    showToast('❌ ' + (res ? res.message : 'ไม่พบข้อมูล'), 'error');
+    showToast('❌ ' + (res ? res.message : 'ไม่พบข้อมูลในตารางระบบค่ะ'), 'error');
     b1.disabled = false; b2.disabled = false; b1.innerHTML = '🔓 เข้าสู่ระบบสมาชิก';
   }
 }
@@ -706,9 +684,19 @@ async function doCheckin() {
   if (state.checkedInToday) { showToast('วันนี้ท่านได้รับแต้มฟรีไปเรียบร้อยแล้วค่ะ', 'error'); return; }
   const checkinBtn = document.getElementById('checkinBtn');
   checkinBtn.disabled = true; checkinBtn.innerHTML = '<div class="spinner"></div>';
-  await updateServerToken(1, "เช็คอินแต้มฟรีรายวัน");
-  state.checkedInToday = true; checkinBtn.textContent = '✓ รับแล้ว';
-  showToast('☀️ เพิ่มโชค +1 แต้มสำเร็จค่ะ', 'success');
+  
+  const res = await callAPI({ action: "checkIn", email: state.user.email });
+  if (res && res.success) {
+    state.tokens = res.tokens;
+    state.checkedInToday = true;
+    updateTokenBadge();
+    checkinBtn.textContent = '✓ รับแล้ว';
+    checkinBtn.disabled = true;
+    showToast('☀️ รับแต้มดวงชะตาประจำวันสำเร็จ +1 ค่ะ', 'success');
+  } else {
+    showToast('❌ ' + (res ? res.message : 'เกิดข้อผิดพลาด'), 'error');
+    checkinBtn.disabled = false; checkinBtn.textContent = 'รับแต้ม +1';
+  }
 }
 
 function setMode(mode) {
@@ -719,12 +707,19 @@ function setMode(mode) {
     if(m === mode) { el.classList.add('active-mode'); tab.classList.add('active'); } 
     else { el.classList.remove('active-mode'); tab.classList.remove('active'); }
   });
+  if (mode === 'daily') {
+    document.getElementById('questionSelector').style.display = 'block';
+    document.getElementById('dailyInteractiveDeckZone').style.display = 'none';
+    document.getElementById('dailyResult').style.display = 'none';
+    // เคลียร์ปุ่มที่เลือกค้างไว้
+    ['finance', 'work', 'love', 'luck'].forEach(c => document.getElementById('qs-' + c).classList.remove('selected'));
+  }
   if (mode === 'weekly') generateWeeklyInteractiveDeck();
   if (mode === 'qa') fetchQaUpdates(); 
 }
 
 // ==========================================
-//  🔮 INTERACTIVE DECK SYSTEM
+// 🔮 INTERACTIVE DECK (สุ่มเลือกไพ่จาก 48 ใบขนาดใหญ่)
 // ==========================================
 function selectCategory(cat) {
   state.selectedCategory = cat;
@@ -739,17 +734,16 @@ function selectCategory(cat) {
 function generateDailyInteractiveDeck() {
   const deck = document.getElementById('dailySelectDeck');
   deck.innerHTML = '';
-  for(let i=0; i<5; i++) {
+  // กางกองไพ่หน้าคว่ำพรีเมียมให้เลือกสรรถึง 48 ใบฉ่ำๆ
+  for(let i=1; i<=48; i++) {
     const cardEl = document.createElement('div');
     cardEl.className = 'tarot-card';
-    cardEl.style.zIndex = 10 + i;
     cardEl.innerHTML = `
-      <div class="card-inner" onclick="revealDailyCard(this)">
-        <div class="card-back"><div class="card-back-pattern"></div></div>
+      <div class="card-inner" onclick="revealDailyCard(this, ${i-1})">
+        <div class="card-back"><i class="fa-solid fa-star"></i><span style="font-size:9px;margin-top:2px;">${i}</span></div>
         <div class="card-face">
-          <div class="card-face-glyph" id="d-glyph">🔮</div>
-          <div class="card-face-name" id="d-name">Card</div>
-          <div class="card-face-sub" id="d-sub">Oracle</div>
+          <div class="card-face-glyph" id="d-glyph-${i}">🔮</div>
+          <div class="card-face-name" id="d-name-${i}">Card</div>
         </div>
       </div>
     `;
@@ -757,31 +751,29 @@ function generateDailyInteractiveDeck() {
   }
 }
 
-async function revealDailyCard(innerEl) {
-  if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนเลือกไพ่ค่ะ', 'error'); openModal('loginModal'); return; }
-  if (state.tokens < 1) { showToast('ยอดแต้มคงเหลือไม่เพียงพอเปิดไพ่', 'error'); openModal('topupModal'); return; }
+async function revealDailyCard(innerEl, clickIdx) {
+  if (state.tokens < 1) { showToast('ยอดแต้มคงเหลือไม่เพียงพอเปิดไพ่ค่ะ', 'error'); openModal('topupModal'); return; }
 
   const cardWrapper = innerEl.parentElement;
   cardWrapper.classList.add('selected-by-user');
   const allCards = document.querySelectorAll('#dailySelectDeck .tarot-card');
   allCards.forEach(c => c.style.pointerEvents = 'none');
 
-  await updateServerToken(-1, "เปิดไพ่เลือกเองรายวัน หมวด " + state.selectedCategory);
+  await updateServerToken(-1, "เปิดไพ่รายวันหมวด " + state.selectedCategory);
 
   const realCard = CARDS[Math.floor(Math.random() * CARDS.length)];
   state.currentDailyCard = realCard;
 
-  cardWrapper.querySelector('#d-glyph').textContent = realCard.glyph;
-  cardWrapper.querySelector('#d-name').textContent = realCard.name;
-  cardWrapper.querySelector('#d-sub').textContent = realCard.sub;
+  cardWrapper.querySelector(`[id^="d-glyph-"]`).textContent = realCard.glyph;
+  cardWrapper.querySelector(`[id^="d-name-"]`).textContent = realCard.name;
 
   setTimeout(() => {
     cardWrapper.classList.add('reveal-animation');
     setTimeout(() => {
       showDailyResult(realCard);
       document.getElementById('dailyResult').scrollIntoView({ behavior: 'smooth' });
-    }, 800);
-  }, 400);
+    }, 600);
+  }, 200);
 }
 
 function showDailyResult(card) {
@@ -790,22 +782,21 @@ function showDailyResult(card) {
   const cm = catMap[cat];
   
   document.getElementById('dailyResult').innerHTML = `
-    <div class="result-box" style="animation: slide-up 0.6s ease;">
+    <div class="result-box" style="animation: slide-up 0.5s ease;">
       <div class="result-header">
-        <div class="result-icon" style="color:white;">${card.glyph}</div>
+        <div class="result-icon">${card.glyph}</div>
         <div class="result-card-name"><strong>${card.name}</strong><span>${card.sub}</span></div>
         <div class="result-category-badge ${cm.badge}">${cm.icon} ${cm.label}</div>
       </div>
       <div class="result-readings">
         <div class="result-reading-item">
           <strong>🔮 คำทำนายดวงชะตาฉบับเจาะลึก:</strong><br><br>
-          <div class="reading-item-text">${card[cat]}</div>
+          <div style="font-size:13px; line-height:1.6;">${card[cat]}</div>
         </div>
       </div>
-      
       <div id="adviceZone" class="advice-lock-zone">
         <strong>💡 ต้องการรับคำแนะนำเสริมชะตาครูเพิ่มไหมคะ?</strong>
-        <p style="font-size:11px; color:var(--ink-muted); margin-top:2px;">เจาะลึกแนวทางแก้ไขปัญหาและทริคเสริมดวงเฉพาะไพ่ใบนี้ (ใช้เพิ่ม 1 แต้ม)</p>
+        <p style="font-size:10px; color:var(--ink-muted); margin-top:2px;">เจาะลึกแนวทางแก้ไขปัญหาและทริคเสริมดวงเฉพาะไพ่ใบนี้ (ใช้เพิ่ม 1 แต้ม)</p>
         <button class="advice-btn" onclick="unlockAdvice()">🪙 ปลดล็อกคำแนะนำพิเศษ (+1 แต้ม)</button>
       </div>
     </div>`;
@@ -813,10 +804,9 @@ function showDailyResult(card) {
 }
 
 async function unlockAdvice() {
-  if (state.tokens < 1) { showToast('ยอดแต้มคงเหลือไม่เพียงพอปลดล็อกคำแนะนำ', 'error'); openModal('topupModal'); return; }
-  
+  if (state.tokens < 1) { showToast('ยอดแต้มคงเหลือไม่เพียงพอค่ะ', 'error'); openModal('topupModal'); return; }
   const zone = document.getElementById('adviceZone');
-  zone.innerHTML = '<div class="spinner"></div> กำลังเชื่อมต่อกระแสจิตคำแนะนำ...';
+  zone.innerHTML = '<div class="spinner"></div> กำลังเชื่อมจิตคำแนะนำครู...';
 
   const success = await updateServerToken(-1, "ซื้อคำแนะนำเพิ่มเติมไพ่ " + state.currentDailyCard.name);
   if (success) {
@@ -825,34 +815,32 @@ async function unlockAdvice() {
     zone.style.border = "1px solid var(--sage)";
     zone.style.textAlign = "left";
     zone.innerHTML = `
-      <strong style="color:var(--sage); font-size:14px;">🌿 คำแนะนำนำทางชีวิตจากแม่หมอเห็ดฟาง:</strong><br><br>
-      <div style="font-size:13.5px; line-height:1.7;">${state.currentDailyCard.advice}</div>
+      <strong style="color:var(--sage); font-size:13.5px;">🌿 คำแนะนำนำทางชีวิตจากแม่หมอเห็ดฟาง:</strong><br><br>
+      <div style="font-size:13px; line-height:1.6;">${state.currentDailyCard.advice}</div>
     `;
   }
 }
 
 // ==========================================
-//  🌙 INTERACTIVE WEEKLY SYSTEM
+// 🌙 INTERACTIVE WEEKLY SYSTEM (รายสัปดาห์กาง 48 ใบ)
 // ==========================================
 function generateWeeklyInteractiveDeck() {
   document.getElementById('weeklyResult').style.display = 'none';
   document.getElementById('weeklyInteractiveDeckZone').style.display = 'block';
-  document.getElementById('weeklyDeckTitle').textContent = '✦ ตั้งสมาธิจิ้มเลือกไพ่หน้าคว่ำให้ครบ 3 ใบ เพื่อดูภาพรวมสัปดาห์นี้';
+  document.getElementById('weeklyDeckTitle').textContent = '✦ ตั้งสมาธิจิ้มเลือกไพ่หน้าคว่ำให้ครบ 3 ใบ';
   state.weeklySelectedIndices = [];
 
   const deck = document.getElementById('weeklySelectDeck');
   deck.innerHTML = '';
-  for(let i=0; i<7; i++) {
+  for(let i=1; i<=48; i++) {
     const cardEl = document.createElement('div');
     cardEl.className = 'tarot-card';
-    cardEl.style.zIndex = 10 + i;
     cardEl.innerHTML = `
-      <div class="card-inner" onclick="selectWeeklyCard(this, ${i})">
-        <div class="card-back"><div class="card-back-pattern"></div></div>
+      <div class="card-inner" onclick="selectWeeklyCard(this, ${i-1})">
+        <div class="card-back"><i class="fa-solid fa-moon"></i><span style="font-size:8px;margin-top:2px;">${i}</span></div>
         <div class="card-face">
           <div class="card-face-glyph" id="w-glyph-${i}">🌙</div>
           <div class="card-face-name" id="w-name-${i}">Oracle</div>
-          <div class="card-face-sub" id="w-sub-${i}">Weekly</div>
         </div>
       </div>
     `;
@@ -861,125 +849,71 @@ function generateWeeklyInteractiveDeck() {
 }
 
 async function selectWeeklyCard(innerEl, clickIndex) {
-  if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนค่ะ', 'error'); openModal('loginModal'); return; }
-  if (state.tokens < 3) { showToast('ยอดแต้มคงเหลือไม่เพียงพอเปิดคำทำนายรายสัปดาห์ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
+  if (state.tokens < 3) { showToast('ยอดแต้มคงเหลือไม่เพียงพอเปิดไพ่รายสัปดาห์ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
   
   const cardWrapper = innerEl.parentElement;
   if(cardWrapper.classList.contains('selected-by-user')) return;
 
   cardWrapper.classList.add('selected-by-user');
   state.weeklySelectedIndices.push(cardWrapper);
-
   document.getElementById('weeklyDeckTitle').textContent = `✦ เลือกไปแล้ว ${state.weeklySelectedIndices.length} / 3 ใบ`;
 
   if(state.weeklySelectedIndices.length === 3) {
     const allCards = document.querySelectorAll('#weeklySelectDeck .tarot-card');
     allCards.forEach(c => c.style.pointerEvents = 'none');
 
-    document.getElementById('weeklyDeckTitle').innerHTML = '<div class="spinner"></div> กำลังจัดวางกระแสพลังงาน...';
-    await updateServerToken(-3, "เปิดไพ่รายสัปดาห์แบบเลือกเอง 3 ใบ");
+    document.getElementById('weeklyDeckTitle').innerHTML = '<div class="spinner"></div> กำลังเรียบเรียงสายสัมพันธ์โชคชะตา...';
+    await updateServerToken(-3, "เปิดไพ่รายสัปดาห์ 3 ใบ");
 
-    const combo = WEEKLY_COMBOS[Math.floor(Math.random() * WEEKLY_COMBOS.length)];
+    // สุ่มดึงไพ่ 3 ใบที่ไม่ซ้ำกันจากสารบบเพื่อประมวลผล
+    let shuffled = [...CARDS].sort(() => 0.5 - Math.random());
+    let selectedCards = shuffled.slice(0, 3);
     
     state.weeklySelectedIndices.forEach((wrap, idx) => {
       setTimeout(() => {
-        const realCard = combo.cards[idx];
+        const realCard = selectedCards[idx];
         wrap.querySelector(`[id^="w-glyph-"]`).textContent = realCard.glyph;
         wrap.querySelector(`[id^="w-name-"]`).textContent = realCard.name;
-        wrap.querySelector(`[id^="w-sub-"]`).textContent = realCard.sub;
         wrap.classList.add('reveal-animation');
-      }, idx * 400);
+      }, idx * 300);
     });
 
     setTimeout(() => {
-      showWeeklyResult(combo);
+      showWeeklyResult(selectedCards);
       document.getElementById('weeklyResult').scrollIntoView({ behavior: 'smooth' });
-    }, 1600);
+    }, 1200);
   }
 }
 
-function showWeeklyResult(combo) {
-  const cards = combo.cards;
+function showWeeklyResult(cards) {
   document.getElementById('weeklyResult').innerHTML = `
-    <div class="result-box" style="animation: slide-up 0.8s ease; margin-top:24px;">
-      <div style="text-align:center; margin-bottom:20px; border-bottom: 1px solid var(--border); padding-bottom:12px;">
-        <h3 style="font-family:var(--font-display); color:var(--gold-dim); font-size:20px;">✦ ผลลัพธ์คำทำนายภาพรวมรายสัปดาห์ ✦</h3>
-        <p style="font-size:11px; color:var(--ink-muted); font-family:var(--font-mono);">การประสานพลังแห่งชะตา: ${cards[0].name}, ${cards[1].name} และ ${cards[2].name}</p>
+    <div class="result-box" style="animation: slide-up 0.6s ease; margin-top:16px;">
+      <div style="text-align:center; margin-bottom:14px; border-bottom: 1px solid var(--border); padding-bottom:10px;">
+        <h3 style="font-family:var(--font-display); color:var(--gold-dim); font-size:18px;">✦ ผลลัพธ์ดวงภาพรวมรายสัปดาห์ ✦</h3>
+        <p style="font-size:10px; color:var(--ink-muted); font-family:var(--font-mono);">${cards[0].name} · ${cards[1].name} · ${cards[2].name}</p>
       </div>
-
       <div class="result-readings">
         <div class="result-reading-item">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>💰</span><strong>วิถีแห่งทรัพย์และการมั่งคั่ง</strong></div>
-          <div style="font-size:13.5px; line-height:1.7;">
-            สัปดาห์นี้กระแสการเงินของท่านขับเคลื่อนด้วยพลังของไพ่ทั้ง 3 ใบที่ปรากฏ มีเกณฑ์ที่ ${cards[0].finance} ซึ่งจะส่งผลต่อเนื่องให้ช่วงสัปดาห์เกิดสภาวะที่ ${cards[1].finance} และจะสรุปปิดท้ายอย่างมีนัยสำคัญคือ ${cards[2].finance} ขอให้ท่านบริหารจัดการทรัพย์ด้วยความรอบคอบค่ะ
-          </div>
+          <div style="font-weight:bold;margin-bottom:4px;">💰 วิถีแห่งทรัพย์สินและการเงิน:</div>
+          <div style="font-size:13px;line-height:1.6;">กระแสทรัพย์ในสัปดาห์นี้เคลื่อนไหวต่อเนื่อง ไพ่หลักทำนายว่า ${cards[0].finance} และจะส่งคลื่นพลังงานนำทางให้เกิดสภาวะที่ ${cards[1].finance} สรุปบทจบของเกณฑ์เงินตราสัปดาห์นี้คือ ${cards[2].finance} ค่ะ</div>
         </div>
-
         <div class="result-reading-item">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>💼</span><strong>เส้นทางอาชีพและความสำเร็จ</strong></div>
-          <div style="font-size:13.5px; line-height:1.7;">
-            ในส่วนของการงานนั้น ชะตาชีวิตในอาชีพของท่านกำลังพบกับการเปลี่ยนแปลง ไพ่บ่งบอกว่า ${cards[0].work} ซึ่งส่งแรงกระเพื่อมต่อเนื่องทำให้ ${cards[1].work} และสุดท้ายเป้าหมายปลายสัปดาห์จะลงเอยที่ ${cards[2].work} ถือเป็นช่วงเวลาที่ต้องใช้ความพยายามสูงแต่ผลลัพธ์คุ้มค่าเหนื่อยแน่นอนค่ะ
-          </div>
+          <div style="font-weight:bold;margin-bottom:4px;">💼 เส้นทางการงานและความสำเร็จ:</div>
+          <div style="font-size:13px;line-height:1.6;">เรื่องหน้าที่การงานและการเจรจาขยับขยาย ชะตาชี้ชัดว่า ${cards[0].work} ขอให้ตั้งรับให้ดีเพราะช่วงกลางวีคระบบงานจะระบุว่า ${cards[1].work} และจะลงเอยอย่างลงตัวในเป้าหมายสุดท้ายคือ ${cards[2].work} ค่ะ</div>
         </div>
-
         <div class="result-reading-item">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span>🌹</span><strong>ความสัมพันธ์และพันธนาการแห่งใจ</strong></div>
-          <div style="font-size:13.5px; line-height:1.7;">
-            เรื่องราวของหัวใจในอาทิตย์นี้มีมนต์ขลังและซับซ้อน พลังงานของไพ่ระบุชัดว่า ${cards[0].love} แต่อาจจะต้องระวังในช่วงที่ชะตาพลิกผันซึ่งจะทำให้ ${cards[1].love} ทว่าในบทสรุปสุดท้ายของความรู้สึกสัปดาห์นี้ ท่านจะพบความกระจ่างใสใจว่า ${cards[2].love} ขอให้เชื่อมั่นในสัญชาตญาณความรู้สึกรักของตัวเองนะคะ
-          </div>
+          <div style="font-weight:bold;margin-bottom:4px;">🌹 พันธนาการความรักและดวงหัวใจ:</div>
+          <div style="font-size:13px;line-height:1.6;">สภาวะความรู้สึกและความสัมพันธ์ในอาทิตย์นี้ระบุว่า ${cards[0].love} ทว่าระวังอุปสรรคแทรกแซงที่ทำให้เกิดสภาวะ ${cards[1].love} แต่ปลายวีคจะคลี่คลายสบายใจกลายเป็นสัจธรรมความสุขว่า ${cards[2].love} ค่ะ</div>
         </div>
-      </div>
-
-      <div style="margin-top:20px; padding-top:12px; border-top: 1px dashed var(--border); text-align:center;">
-        <p style="font-size:12px; font-style:italic; color:var(--gold-dim);">"ขอสาส์นนำทางนี้เป็นแสงไฟส่องสว่างความสุขให้แก่ท่านตลอดทั้งสัปดาห์" — แม่หมอเห็ดฟาง</p>
       </div>
     </div>`;
   document.getElementById('weeklyResult').style.display = 'block';
 }
 
-// ==========================================
-//  💬 Q&A MANAGEMENT SYSTEMS
-// ==========================================
-async function handleQaAsk() {
-  if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนค่ะ', 'error'); return; }
-  const q = document.getElementById('qaInput').value.trim();
-  if (!q) { showToast('กรุณาเขียนคำถามก่อนส่งฝากค่ะ', 'error'); return; }
-  if (state.tokens < 3) { showToast('ยอดแต้มคงเหลือไม่เพียงพอ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
-
-  const btn = document.getElementById('qaBtn'); btn.disabled = true;
-  btn.innerHTML = '<div class="spinner"></div> กำลังส่งสาส์น...';
-
-  const res = await callAPI({ action: "submitQA", email: state.user.email, question: q });
-  if (res && res.success) {
-    state.tokens = res.tokens; document.getElementById('qaInput').value = '';
-    showToast('✨ ส่งสาส์นคำถามสำเร็จ รอแม่หมอเห็ดฟางมาตอบดวงให้ค่ะ', 'success');
-    fetchQaUpdates();
-  }
-  btn.disabled = false; btn.innerHTML = '✨ ส่งคำถามฝากแม่หมอ';
-}
-
-async function fetchQaUpdates() {
-  if (!state.loggedIn) return;
-  const res = await callAPI({ action: "fetchQA", email: state.user.email });
-  if (res && res.success && res.history) {
-    document.getElementById('qaHistory').innerHTML = res.history.map(item => `
-      <div class="qa-item" style="animation: slide-up 0.4s ease;">
-        <div class="qa-q">
-          <span class="${item.status.toLowerCase() === 'pending' ? 'qa-status-pending' : 'qa-status-answered'}">
-            ${item.status.toLowerCase() === 'pending' ? '⏳ รอตรวจชะตา' : '✓ ตอบแล้ว'}
-          </span>
-          💬 คำถาม: ${item.q}
-        </div>
-        <div class="qa-a">🔮 แม่หมอเห็ดฟางบอกสาส์น: ${item.a}</div>
-      </div>
-    `).join('');
-  }
-}
-
 function initTopupMainContent() {
   document.getElementById('topupModalContent').innerHTML = `
     <button class="modal-close" onclick="closeModal('topupModal')">✕</button>
-    <div class="modal-title" style="font-family:var(--font-display); font-size:16px; font-weight:600; text-align:center;">🪙 บูชาเพิ่มแต้มสำหรับเปิดไพ่ชะตาชีวิต</div>
+    <div style="font-family:var(--font-display); font-size:15px; font-weight:600; text-align:center;">🪙 บูชาเพิ่มแต้มเหรียญส่องดวงชะตา</div>
     <div class="package-list">
       <div class="package-item" onclick="buyPackage(5, 50)"><strong>🪙 5 แต้ม</strong> <span>฿50</span></div>
       <div class="package-item" onclick="buyPackage(12, 100)"><strong>🪙 12 แต้ม</strong> <span>฿100</span></div>
@@ -991,23 +925,20 @@ function initTopupMainContent() {
 function buyPackage(tokens, price) {
   document.getElementById('topupModalContent').innerHTML = `
     <button class="modal-close" onclick="initTopupMainContent()">✕</button>
-    <div class="modal-title" style="text-align:center; color:var(--gold); font-size:15px; font-weight:600; margin-bottom:4px;">🔮 ช่องทางการโอนบูชาเงินเพื่อรับแต้ม</div>
-    <div class="modal-sub" style="text-align:center; margin-bottom:12px; font-size:12px;">ท่านเลือกแพ็กเกจ: <strong>🪙 ${tokens} แต้ม</strong> ยอดสุทธิ: <strong>฿${price}</strong></div>
-    <div style="background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center; margin-bottom:12px;">
-      <p style="font-size:11px; opacity:0.8;">โอนเข้าบัญชี Mobile Banking</p>
-      <p style="font-size:13px; font-weight:600;">🏦 ธนาคารกสิกรไทย (KBank)</p>
-      <p style="font-size:16px; font-family:var(--font-mono); font-weight:600; color:var(--gold-dim); margin:2px 0;">179-8-46891-6</p>
+    <div style="text-align:center; color:var(--gold); font-size:14px; font-weight:600; margin-bottom:4px;">🔮 บัญชีโอนบูชาค่าครูรับแต้ม</div>
+    <div style="text-align:center; margin-bottom:10px; font-size:11px;">แพ็กเกจ: 🪙 ${tokens} แต้ม | ยอดสุทธิ: ฿${price}</div>
+    <div style="background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center; margin-bottom:10px;">
+      <p style="font-size:11px; opacity:0.8;">🏦 ธนาคารกสิกรไทย (KBank)</p>
+      <p style="font-size:15px; font-family:var(--font-mono); font-weight:600; color:var(--gold-dim);">179-8-46891-6</p>
       <p style="font-size:11px; font-weight:500;">ชื่อบัญชี: ผกามาศ บรรทัดจันทร์</p>
     </div>
-    <div style="text-align:center; margin-bottom:12px;">
-      <img src="https://i.ibb.co/d0pCLPGM/Screenshot-2026-05-20-082119.png" alt="QR" style="max-width:130px; border-radius:6px; border:1px solid var(--border);">
-    </div>
-    <button class="btn btn-dark" style="width:100%; padding:12px; font-size:13px; background:#06C755; color:white; border:none;" onclick="redirectToLineOA(${tokens}, ${price})">💬 ส่งรูปสลิปแจ้งแอดมินผ่านแอป LINE</button>
+    <div style="text-align:center; margin-bottom:10px;"><img src="https://i.ibb.co/d0pCLPGM/Screenshot-2026-05-20-082119.png" alt="QR" style="max-width:110px; border-radius:6px; border:1px solid var(--border);"></div>
+    <button class="btn-read" style="background:#06C755; padding:10px; font-size:12px;" onclick="redirectToLineOA(${tokens}, ${price})">💬 ส่งสลิปแจ้งโอนผ่านแอป LINE</button>
   `;
 }
 
 function redirectToLineOA(tokens, price) {
-  const textMessage = encodeURIComponent(`🔮 แจ้งโอนเงินดูดวงค่ะ\n👤 อีเมลระบบ: ${state.user.email}\n🪙 แพ็กเกจที่เลือก: ${tokens} แต้ม\n💰 ยอดโอน: ${price} บาท\n(ท่านสามารถแนบรูปสลิปหลักฐานต่อท้ายข้อความนี้ได้เลยค่ะ)`);
+  const textMessage = encodeURIComponent(`🔮 แจ้งโอนเงินดูดวงค่ะ\n👤 อีเมล: ${state.user.email}\n🪙 แพ็กเกจ: ${tokens} แต้ม\n💰 ยอด: ${price} บาท\n(แนบสลิปหลักฐานต่อท้ายได้เลยค่ะ)`);
   window.open(`https://line.me/R/oaMessage/@626bkxzd/?${textMessage}`, '_blank');
   closeModal('topupModal');
 }
@@ -1022,20 +953,7 @@ function updateUI() {
 
   const topbar = document.getElementById('topbarRight');
   if (state.loggedIn) {
-    topbar.innerHTML = `
-      <span class="user-name">👤 ${state.user.name}</span>
-      <div class="token-badge" id="tokenBadge">🪙 ${state.tokens} แต้ม</div>
-      <button class="btn btn-ghost" onclick="openModal('topupModal')">+ เติมแต้ม</button>
-      <button class="btn btn-outline" onclick="doLogout()" style="padding:4px 10px; font-size:11px; margin-left:5px;">ออก</button>
-    `;
-    document.getElementById('checkinBanner').style.display = 'block';
-    document.getElementById('modeTabs').style.display = 'flex';
-    document.getElementById('questionSelector').style.display = 'block';
-    
-    const checkinBtn = document.getElementById('checkinBtn');
-    checkinBtn.textContent = state.checkedInToday ? '✓ รับแล้ว' : 'รับแต้มประจำวัน +1';
-    checkinBtn.disabled = state.checkedInToday;
-    checkTokenWarning();
+    topbar.innerHTML = `<span class="user-name">👤 ${state.user.name}</span><div class="token-badge" id="tokenBadge">🪙 ${state.tokens}</div><button class="btn btn-ghost" onclick="openModal('topupModal')">+</button><button class="btn btn-outline" onclick="doLogout()" style="padding:4px 8px; font-size:11px; margin-left:2px;">ออก</button>`;
   } else {
     showGuestTopbar();
   }
@@ -1043,13 +961,7 @@ function updateUI() {
 
 function updateTokenBadge() {
   const badge = document.getElementById('tokenBadge');
-  if (badge) badge.textContent = `🪙 ${state.tokens} แต้ม`;
-  checkTokenWarning();
-}
-
-function checkTokenWarning() {
-  const btn = document.getElementById('openCardBtn');
-  if (btn) btn.disabled = (state.tokens === 0);
+  if (badge) badge.textContent = `🪙 ${state.tokens}`;
 }
 </script>
 </body>
