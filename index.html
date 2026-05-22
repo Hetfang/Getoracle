@@ -134,8 +134,11 @@ body::before {
 .btn-read { width: 100%; background: var(--ink); color: var(--cream); border: none; padding: 14px; border-radius: var(--radius-sm); font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-read:disabled { background: #64748b; cursor: not-allowed; }
 .qa-history { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.qa-item { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 8px; }
+.qa-q { font-weight: bold; margin-bottom: 6px; font-size: 13px; }
+.qa-a { font-size: 13px; color: var(--ink-soft); line-height: 1.5; border-top: 1px dashed var(--border); padding-top: 6px; margin-top: 4px; }
 
-/* ===== ⏳ DYNAMIC GLOBAL LOADING SCREEN (แก้ปัญหานิ่งค้าง) ===== */
+/* ===== ⏳ DYNAMIC GLOBAL LOADING SCREEN ===== */
 .global-loading-overlay { position: fixed; inset: 0; background: rgba(26,22,18,0.75); backdrop-filter: blur(5px); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; color: var(--gold-light); gap: 15px; }
 .global-loading-overlay.active { opacity: 1; pointer-events: all; }
 .magic-spinner { width: 44px; height: 44px; border: 3px solid rgba(232,213,176,0.2); border-top-color: var(--gold-light); border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -174,7 +177,7 @@ body::before {
   
   <div class="hero">
     <div class="hero-title">ยินดีต้อนรับสู่ <em>Get Oracle</em></div>
-    <div class="hero-sub">เช็กดวงชะต ปลดล็อกคำทำนายนำทางชีวิต</div>
+    <div class="hero-sub">พื้นที่เช็กดวงชะตา ปลดล็อกคำทำนายนำทางชีวิต</div>
   </div>
 
   <div id="lobby-view" style="width:100%; display:flex; flex-direction:column; align-items:center;">
@@ -216,7 +219,7 @@ body::before {
       </div>
     </div>
     <div id="dailyInteractiveDeckZone" class="deck-wrapper" style="display:none; width:100%;">
-      <div class="deck-title" style="font-size:12px; color:var(--gold-dim); margin-bottom:10px; text-align:center;">✦ ขั้นตอนที่ 2: ตั้งสมาธิแล้วเลือกไพ่ที่ดึงดูดใจคุณ 1 ใบ</div>
+      <div class="deck-title" style="font-size:12px; color:var(--gold-dim); margin-bottom:10px; text-align:center;">✦ ขั้นตอนที่ 2: ตั้งสมาธิจิ้มเลือกไพ่ที่ดึงดูดใจคุณ 1 ใบ</div>
       <div class="interactive-deck" id="dailySelectDeck"></div>
     </div>
     <div id="dailyResult" style="display:none"></div>
@@ -262,8 +265,10 @@ body::before {
 <div class="toast" id="toast"></div>
 
 <script>
-const state = { loggedIn: false, user: { name: '', email: '', phone: '' }, tokens: 0, checkedInToday: false, currentMode: 'daily', selectedCategory: null, weeklySelectedIndices: [], currentDailyCard: null };
+// ⚠️ เปลี่ยนเป็น URL ลิงก์ Web App ปัจจุบันหลังบ้านของแม่หมอนะคะ
+const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbybH7Qy4qWTv_yE1cg_BSJ9kmfPf9RzOE09Gx3En-FvQ0kxK-9V4QVC_8OVWsd0XetyhQ/exec"; 
 
+const state = { loggedIn: false, user: { name: '', email: '', phone: '' }, tokens: 0, checkedInToday: false, currentMode: 'daily', selectedCategory: null, weeklySelectedIndices: [], currentDailyCard: null };
 // ==========================================
 //  🔮 ฐานข้อมูลคำทำนายไพ่ออราเคิลพรีเมียม 48 ใบเด็ดขาด
 // ==========================================
@@ -558,6 +563,13 @@ const CARDS = [
     advice: 'คุณได้ก้าวผ่านอุปสรรคขวากหนามทั้งหมดและวิ่งเข้าสู่เส้นชัยสำเร็จอย่างสง่างามแล้วค่ะในวันนี้ ถอนหายใจยาวๆ ชื่นชมกับความสำเร็จและให้รางวัลตัวเองให้เต็มที่ จบดีลงานใหญ่อย่างงดงามแล้วพักผ่อนกายใจให้ชื่นฉ่ำเพื่อเตรียมพร้อมรับทรัพย์ต่อยาวๆ ค่ะ' }
 ];
 const WEEKLY_COMBOS = [ { cards: [CARDS[0], CARDS[1], CARDS[2]] } ];
+
+// ==========================================
+// 🔓 INITIALIZATION SYSTEM
+// ==========================================
+window.addEventListener('DOMContentLoaded', () => {
+  checkSavedLogin();
+});
 
 // ==========================================
 // 🔓 CONNECTIVITY MODULE & LOADING SYSTEM
@@ -907,11 +919,10 @@ function updateUI() {
   const loadingEl = document.getElementById('authLoading'); if (loadingEl) loadingEl.style.display = 'none';
   const topbar = document.getElementById('topbarRight');
   if (state.loggedIn) {
-    topbar.innerHTML = `<span class="user-name">👤 ${state.user.name}</span><div class="token-badge" id="tokenBadge">🪙 ${state.tokens}</div><button class="btn btn-ghost" onclick="openModal('topupModal')"><i class="fa-solid fa-wallet"></i> เติมแต้ม</button><button class="btn btn-outline" onclick="doLogout()" style="padding:4px 8px; font-size:11px; margin-left:2px;">ออก</button>`;
+    topbar.innerHTML = `<span class="user-name">👤 ${state.user.name}</span><div class="token-badge" id="tokenBadge">🪙 ${state.tokens}</div><button class="btn btn-ghost" onclick="openModal('topupModal')"><i class="fa-solid fa-wallet"></i> เเติมแต้ม</button><button class="btn btn-outline" onclick="doLogout()" style="padding:4px 8px; font-size:11px; margin-left:2px;">ออก</button>`;
     document.getElementById('checkinBanner').style.display = 'block';
     document.getElementById('modeTabs').style.display = 'flex';
     
-    // ตั้งค่าสถานะปุ่มเช็กอินให้ตรงความจริงทันทีกรณีเคยเช็กไปแล้ว
     const checkinBtn = document.getElementById('checkinBtn');
     if (checkinBtn && state.checkedInToday) {
       checkinBtn.textContent = '✓ วันนี้แกรับพรไปแล้วจ้า';
