@@ -702,7 +702,7 @@ async function doCheckin() {
     state.tokens = res.tokens; state.checkedInToday = true; updateTokenBadge();
     const checkinBtn = document.getElementById('checkinBtn');
     if (checkinBtn) {
-      checkinBtn.textContent = '✓ วันนี้รับพรไปแล้วจ้า';
+      checkinBtn.textContent = '✓ วันนี้รับพรแล้ว';
       checkinBtn.disabled = true;
     }
     showToast('☀️ เพิ่มแต้มความปังสำเร็จ! +1 แต้มให้เรียบร้อยค่ะ', 'success');
