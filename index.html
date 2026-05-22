@@ -702,7 +702,7 @@ async function doCheckin() {
     state.tokens = res.tokens; state.checkedInToday = true; updateTokenBadge();
     const checkinBtn = document.getElementById('checkinBtn');
     if (checkinBtn) {
-      checkinBtn.textContent = '✓ วันนี้แกรับพรไปแล้วจ้า';
+      checkinBtn.textContent = '✓ วันนี้รับพรไปแล้วจ้า';
       checkinBtn.disabled = true;
     }
     showToast('☀️ เพิ่มแต้มความปังสำเร็จ! +1 แต้มให้เรียบร้อยค่ะ', 'success');
@@ -852,7 +852,7 @@ function showWeeklyResult(cards) {
 async function handleQaAsk() {
   if (!state.loggedIn) { showToast('กรุณาเข้าสู่ระบบก่อนฝากคำถามนะคะ', 'error'); return; }
   const q = document.getElementById('qaInput').value.trim();
-  if (!q) { showToast('กรุณาพิมพ์ข้อความคำถามก่อนนะคะเธอ', 'error'); return; }
+  if (!q) { showToast('กรุณาพิมพ์ข้อความคำถามก่อนนะคะ', 'error'); return; }
   if (state.tokens < 3) { showToast('แต้มคงเหลือไม่เพียงพอค่ะ (ใช้ 3 แต้ม)', 'error'); openModal('topupModal'); return; }
 
   const btn = document.getElementById('qaBtn');
