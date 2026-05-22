@@ -211,6 +211,7 @@ body::before {
   <div id="modeDaily" class="mode-container">
     <div class="question-selector" id="questionSelector">
       <div class="qs-title">✦ ขั้นตอนที่ 1: เลือกเรื่องที่ต้องการถาม</div>
+      <div class="qs-title"> (แนะนำ : ไม่ควรดูเกินหัวข้อล่ะ 1 ครั้ง/วัน เพื่อ </div>
       <div class="qs-grid">
         <button class="qs-btn" id="qs-finance" onclick="selectCategory('finance')"><span class="qs-icon">💰</span><span class="qs-label">การเงิน</span></button>
         <button class="qs-btn" id="qs-work" onclick="selectCategory('work')"><span class="qs-icon">💼</span><span class="qs-label">การงาน</span></button>
@@ -237,7 +238,7 @@ body::before {
     <div class="qa-box">
       <div class="qa-title">💬 ฝากคำถามดวงชะตาถึงแม่หมอเห็ดฟาง</div>
       <div class="qa-subtitle">พิมพ์คำถามให้ชัดเจนและละเอียด ผ่านจิตอันตั้งมั่นนะคะ · ใช้ 3 แต้ม</div>
-      <textarea class="qa-input" id="qaInput" placeholder="พิมพ์คำถามตรงนี้... เดี๋ยวแม่หมอจะรีบมาเขียนคำตอบให้ค่ะ"></textarea>
+      <textarea class="qa-input" id="qaInput" placeholder="พิมพ์คำถามตรงนี้... แม่หมอจะตอบกลับภายใน 24 ชม."></textarea>
       <button class="btn-read" id="qaBtn" onclick="handleQaAsk()">
         <i class="fa-solid fa-paper-plane"></i> ส่งคำถามฝากแม่หมอ
       </button>
